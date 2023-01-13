@@ -1,4 +1,4 @@
-Joined Github **10** years ago.
+Joined Github **11** years ago.
 
 Since then I pushed **9950** commits, opened **623** issues, submitted **507** pull requests, received **43** stars across **116** personal projects and contributed to **33** public repositories.
 
