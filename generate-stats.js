@@ -627,7 +627,7 @@ async function main() {
   
   const topRepos = reposWithCommits
     .sort((a, b) => b.commits - a.commits)
-    .slice(0, 5)
+    .slice(0, 10)
   
   console.log('Fetching additions/deletions for top repos...')
   let totalAdditionsLastYear = 0
