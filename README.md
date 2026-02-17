@@ -6,9 +6,9 @@ Joined Github **14** years ago.
 
 | All Time | Last Year |
 |----------|-----------|
-| 📦 **383** public repos | 🔥 **790** commits |
-| 🔥 **1,145** commits | ➕ <font color="green">+436,325</font> lines added |
-| ⭐ **892** stars | ➖ <font color="red">-44,183</font> lines removed |
+| 📦 **383** public repos | 🔥 **792** commits |
+| 🔥 **N/A** commits | ➕ $\color{Green}{\textsf{+436,325}}$ lines added |
+| ⭐ **892** stars | ➖ $\color{Red}{\textsf{-44,183}}$ lines removed |
 
 ## 📝 Top Languages (Last Year)
 
@@ -16,8 +16,8 @@ Joined Github **14** years ago.
 
 ## 🚀 Most Active Projects (Last Year)
 
-- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 94 commits, <font color="green">+33,268</font> / <font color="red">-9,128</font>
-- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, <font color="green">+7,824</font> / <font color="red">-1,912</font>
-- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 78 commits, <font color="green">+10,090</font> / <font color="red">-3,134</font>
-- [TwoFac](https://github.com/championswimmer/TwoFac) - 58 commits, <font color="green">+14,454</font> / <font color="red">-3,862</font>
-- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, <font color="green">+370,689</font> / <font color="red">-26,147</font>
+- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 94 commits, $\color{Green}{\textsf{+33,268}}$ / $\color{Red}{\textsf{-9,128}}$
+- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, $\color{Green}{\textsf{+7,824}}$ / $\color{Red}{\textsf{-1,912}}$
+- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 78 commits, $\color{Green}{\textsf{+10,090}}$ / $\color{Red}{\textsf{-3,134}}$
+- [TwoFac](https://github.com/championswimmer/TwoFac) - 58 commits, $\color{Green}{\textsf{+14,454}}$ / $\color{Red}{\textsf{-3,862}}$
+- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, $\color{Green}{\textsf{+370,689}}$ / $\color{Red}{\textsf{-26,147}}$

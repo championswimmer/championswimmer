@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 
+const fs = require('fs')
+const path = require('path')
+const yaml = require('js-yaml')
+
 const LANGUAGE_COLORS = {
   JavaScript: '#f1e05a',
   TypeScript: '#3178c6',
@@ -42,6 +46,72 @@ const LANGUAGE_COLORS = {
   Default: '#555555'
 }
 
+const CACHE_FILE = path.join(__dirname, 'language-colors-cache.json')
+let cachedLanguageColors = null
+
+async function loadLanguageColors() {
+  if (cachedLanguageColors) {
+    console.log('Using cached language colors')
+    return cachedLanguageColors
+  }
+
+  if (fs.existsSync(CACHE_FILE)) {
+    try {
+      const cacheData = fs.readFileSync(CACHE_FILE, 'utf-8')
+      const cache = JSON.parse(cacheData)
+      const cacheAge = Date.now() - cache.timestamp
+      const oneDay = 24 * 60 * 60 * 1000
+      
+      if (cacheAge < oneDay) {
+        console.log('Using cached language colors from file (less than 1 day old)')
+        cachedLanguageColors = cache.colors
+        return cachedLanguageColors
+      }
+      console.log('Language colors cache expired, refreshing...')
+    } catch (e) {
+      console.log('Failed to read cache, fetching fresh data...')
+    }
+  }
+
+  console.log('Fetching language colors from GitHub Linguist...')
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml')
+    
+    if (!response.ok) {
+      throw new Error(`Failed to fetch: ${response.status}`)
+    }
+    
+    const yamlContent = await response.text()
+    const languages = yaml.load(yamlContent)
+    
+    const languageColors = {}
+    for (const [name, config] of Object.entries(languages)) {
+      if (config.color) {
+        languageColors[name] = config.color
+      }
+    }
+    
+    cachedLanguageColors = languageColors
+    
+    const cacheData = {
+      timestamp: Date.now(),
+      colors: languageColors
+    }
+    fs.writeFileSync(CACHE_FILE, JSON.stringify(cacheData, null, 2))
+    console.log(`Loaded ${Object.keys(languageColors).length} language colors from GitHub Linguist`)
+    
+    return languageColors
+  } catch (e) {
+    console.error(`Failed to fetch language colors: ${e.message}`)
+    console.log('Falling back to hardcoded LANGUAGE_COLORS')
+    return LANGUAGE_COLORS
+  }
+}
+
+function getLanguageColor(languageName, githubColor, languageColors) {
+  return githubColor || languageColors[languageName] || LANGUAGE_COLORS[languageName] || LANGUAGE_COLORS.Default
+}
+
 function formatNumber(num) {
   return num.toLocaleString()
 }
@@ -63,20 +133,38 @@ async function getGitHubToken() {
 }
 
 async function graphqlQuery(token, query, variables = {}) {
-  const response = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ query, variables }),
-  })
-  
-  const data = await response.json()
-  if (data.errors) {
-    throw new Error(`GraphQL Error: ${JSON.stringify(data.errors)}`)
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await fetch('https://api.github.com/graphql', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ query, variables }),
+      })
+      
+      const data = await response.json()
+      
+      if (data.errors) {
+        if (attempt < 3) {
+          console.log(`  Attempt ${attempt}/3 failed (API error), retrying in 1s...`)
+          await new Promise(resolve => setTimeout(resolve, 1000))
+          continue
+        }
+        throw new Error(`GraphQL Error: ${JSON.stringify(data.errors)}`)
+      }
+      
+      return data.data
+    } catch (err) {
+      if (attempt < 3) {
+        console.log(`  Attempt ${attempt}/3 failed (error), retrying in 1s...`)
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        continue
+      }
+      throw err
+    }
   }
-  return data.data
 }
 
 async function fetchUserInfo(token) {
@@ -86,11 +174,6 @@ async function fetchUserInfo(token) {
         id
         login
         createdAt
-        contributionsCollection {
-          totalCommitContributions
-          totalRepositoriesWithContributedCommits
-          restrictedContributionsCount
-        }
         repositories(ownerAffiliations: OWNER, privacy: PUBLIC, first: 100) {
           totalCount
           nodes {
@@ -113,7 +196,7 @@ async function fetchUserInfo(token) {
   return graphqlQuery(token, query)
 }
 
-async function fetchUserReposWithCommits(token, username, userId, since) {
+async function fetchUserReposWithCommits(token, username, userId, since, languageColors) {
   const repos = []
   let cursor = null
   let hasNextPage = true
@@ -164,7 +247,7 @@ async function fetchUserReposWithCommits(token, username, userId, since) {
         const languages = repo.languages.edges.map(e => ({
           name: e.node.name,
           percentage: totalLangSize > 0 ? (e.size / totalLangSize) * 100 : 0,
-          color: e.node.color || LANGUAGE_COLORS[e.node.name] || LANGUAGE_COLORS.Default
+          color: getLanguageColor(e.node.name, e.node.color, languageColors)
         }))
         
         repos.push({
@@ -184,6 +267,56 @@ async function fetchUserReposWithCommits(token, username, userId, since) {
   }
   
   return repos
+}
+
+async function fetchAllTimeCommits(token, username, userId) {
+  let totalCommits = 0
+  let cursor = null
+  let hasNextPage = true
+  
+  while (hasNextPage) {
+    const query = `
+      query($username: String!, $cursor: String) {
+        user(login: $username) {
+          repositories(first: 100, after: $cursor, ownerAffiliations: OWNER, privacy: PUBLIC) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            nodes {
+              defaultBranchRef {
+                target {
+                  ... on Commit {
+                    history(author: {id: "${userId}"}) {
+                      totalCount
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+    
+    const data = await graphqlQuery(token, query, { username, cursor }, 5, 3000)
+    const repoNodes = data.user.repositories.nodes
+    
+    for (const repo of repoNodes) {
+      const commitCount = repo.defaultBranchRef?.target?.history?.totalCount || 0
+      totalCommits += commitCount
+    }
+    
+    hasNextPage = data.user.repositories.pageInfo.hasNextPage
+    cursor = data.user.repositories.pageInfo.endCursor
+    console.log(`  All-time commits: ${totalCommits} (fetching more...)`)
+    
+    if (hasNextPage) {
+      await new Promise(resolve => setTimeout(resolve, 1000))
+    }
+  }
+  
+  return totalCommits
 }
 
 async function fetchRepoCommitStats(token, owner, repoName, userId, since) {
@@ -233,7 +366,7 @@ async function fetchRepoCommitStats(token, owner, repoName, userId, since) {
   return { additions, deletions }
 }
 
-function calculateTopLanguages(repos, topN = 5) {
+function calculateTopLanguages(repos, topN = 5, languageColors) {
   const languageCommits = {}
   
   for (const repo of repos) {
@@ -258,7 +391,7 @@ function calculateTopLanguages(repos, topN = 5) {
   return sortedLanguages.map(lang => ({
     name: lang.name,
     percentage: totalWeightedCommits > 0 ? Math.round((lang.weightedCommits / totalWeightedCommits) * 100) : 0,
-    color: lang.color || LANGUAGE_COLORS[lang.name] || LANGUAGE_COLORS.Default
+    color: getLanguageColor(lang.name, lang.color, languageColors)
   }))
 }
 
@@ -275,13 +408,13 @@ function processTemplate(template, data) {
   result = result.replace(/{{\s*ACCOUNT_AGE\s*}}/g, data.accountAge)
   result = result.replace(/{{\s*COMMITS\s*}}/g, formatNumber(data.totalCommitsLastYear))
   result = result.replace(/{{\s*TOTAL_COMMITS_LAST_YEAR\s*}}/g, formatNumber(data.totalCommitsLastYear))
-  result = result.replace(/{{\s*TOTAL_COMMITS_ALL_TIME\s*}}/g, formatNumber(data.totalCommitsAllTime))
+  result = result.replace(/{{\s*TOTAL_COMMITS_ALL_TIME\s*}}/g, typeof data.totalCommitsAllTime === 'number' ? formatNumber(data.totalCommitsAllTime) : data.totalCommitsAllTime)
   result = result.replace(/{{\s*REPOS_OWNED\s*}}/g, formatNumber(data.reposOwned))
   result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, formatNumber(data.reposOwned))
   result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, formatNumber(data.starsReceived))
   result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, formatNumber(data.starsReceived))
-  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `➕ <font color="green">+${formatNumber(data.totalAdditionsLastYear)}</font>`)
-  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `➖ <font color="red">-${formatNumber(data.totalDeletionsLastYear)}</font>`)
+  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `➕ $\\color{Green}{\\textsf{+${formatNumber(data.totalAdditionsLastYear)}}}$`)
+  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `➖ $\\color{Red}{\\textsf{-${formatNumber(data.totalDeletionsLastYear)}}}$`)
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
@@ -305,8 +438,8 @@ function processTemplate(template, data) {
       item = item.replace(/{{\s*REPO_NAME\s*}}/g, repo.name)
       item = item.replace(/{{\s*REPO_URL\s*}}/g, repo.url)
       item = item.replace(/{{\s*REPO_COMMITS\s*}}/g, formatNumber(repo.commits))
-      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, `<font color="green">+${formatNumber(repo.additions)}</font>`)
-      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, `<font color="red">-${formatNumber(repo.deletions)}</font>`)
+      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, `$\\color{Green}{\\textsf{+${formatNumber(repo.additions)}}}$`)
+      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, `$\\color{Red}{\\textsf{-${formatNumber(repo.deletions)}}}$`)
       return item.trimEnd()
     }).join('\n')
     result = result.replace(/{{\s*REPO_TEMPLATE_START\s*}}[\s\S]*?{{\s*REPO_TEMPLATE_END\s*}}/, repoItems)
@@ -317,6 +450,8 @@ function processTemplate(template, data) {
 
 async function main() {
   console.log('Starting stats generation...')
+  
+  const languageColors = await loadLanguageColors()
   
   const token = await getGitHubToken()
   console.log('GitHub token obtained')
@@ -333,16 +468,22 @@ async function main() {
   oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
   console.log(`Fetching commits since: ${oneYearAgo.toISOString()}`)
   
-  const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo)
+  const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo, languageColors)
   console.log(`Found ${reposWithCommits.length} repos with commits in the last year`)
   
   const totalCommitsLastYear = reposWithCommits.reduce((sum, r) => sum + r.commits, 0)
   console.log(`Total commits in last year: ${totalCommitsLastYear}`)
   
-  const totalCommitsAllTime = viewer.contributionsCollection.totalCommitContributions
-  console.log(`Total commits all-time: ${totalCommitsAllTime}`)
+  console.log('Fetching all-time commits...')
+  let totalCommitsAllTime = 'N/A'
+  try {
+    totalCommitsAllTime = await fetchAllTimeCommits(token, viewer.login, viewer.id)
+    console.log(`Total commits all-time: ${totalCommitsAllTime}`)
+  } catch (e) {
+    console.log(`Could not fetch all-time commits: ${e.message}`)
+  }
   
-  const topLanguages = calculateTopLanguages(reposWithCommits, 5)
+  const topLanguages = calculateTopLanguages(reposWithCommits, 5, languageColors)
   console.log(`Top languages: ${topLanguages.map(l => `${l.name} (${l.percentage}%)`).join(', ')}`)
   
   const topRepos = reposWithCommits
@@ -380,9 +521,6 @@ async function main() {
     topLanguages,
     topRepos
   }
-  
-  const fs = require('fs')
-  const path = require('path')
   
   const templatePath = path.join(__dirname, 'TEMPLATE.md')
   let template = ''

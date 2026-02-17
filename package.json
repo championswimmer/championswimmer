@@ -1,0 +1,9 @@
+{
+  "name": "generate-stats",
+  "version": "1.0.0",
+  "description": "Generate GitHub stats",
+  "main": "generate-stats.js",
+  "dependencies": {
+    "js-yaml": "^4.1.0"
+  }
+}
