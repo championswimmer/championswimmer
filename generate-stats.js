@@ -324,7 +324,7 @@ async function fetchUserReposWithCommits(token, username, userId, since, languag
     const query = `
       query($username: String!, $cursor: String) {
         user(login: $username) {
-          repositories(first: 100, after: $cursor, ownerAffiliations: OWNER, privacy: PUBLIC) {
+          repositories(first: 30, after: $cursor, ownerAffiliations: OWNER, privacy: PUBLIC) {
             pageInfo {
               hasNextPage
               endCursor
