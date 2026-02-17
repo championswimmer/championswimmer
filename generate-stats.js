@@ -132,24 +132,47 @@ async function getGitHubToken() {
   throw new Error('No GitHub token found. Set GITHUB_TOKEN env var or use gh auth login')
 }
 
+function isTransientGraphQLError(errors) {
+  return errors.some(error => {
+    const message = String(error.message || '')
+    const type = String(error.type || '')
+    return message.includes('Something went wrong') || type === 'INTERNAL'
+  })
+}
+
 async function graphqlQuery(token, query, variables = {}) {
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  const maxAttempts = 5
+  for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       const response = await fetch('https://api.github.com/graphql', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json',
+          'User-Agent': 'readme-stats-generator',
         },
         body: JSON.stringify({ query, variables }),
       })
       
+      if (!response.ok) {
+        const statusText = response.statusText || 'Request failed'
+        if (attempt < maxAttempts) {
+          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+          console.log(`  Attempt ${attempt}/${maxAttempts} failed (${response.status} ${statusText}), retrying in ${Math.ceil(delayMs / 1000)}s...`)
+          await new Promise(resolve => setTimeout(resolve, delayMs))
+          continue
+        }
+        throw new Error(`GraphQL HTTP ${response.status}: ${statusText}`)
+      }
+      
       const data = await response.json()
       
       if (data.errors) {
-        if (attempt < 3) {
-          console.log(`  Attempt ${attempt}/3 failed (API error), retrying in 1s...`)
-          await new Promise(resolve => setTimeout(resolve, 1000))
+        const shouldRetry = isTransientGraphQLError(data.errors)
+        if (shouldRetry && attempt < maxAttempts) {
+          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+          console.log(`  Attempt ${attempt}/${maxAttempts} failed (transient API error), retrying in ${Math.ceil(delayMs / 1000)}s...`)
+          await new Promise(resolve => setTimeout(resolve, delayMs))
           continue
         }
         throw new Error(`GraphQL Error: ${JSON.stringify(data.errors)}`)
@@ -157,9 +180,10 @@ async function graphqlQuery(token, query, variables = {}) {
       
       return data.data
     } catch (err) {
-      if (attempt < 3) {
-        console.log(`  Attempt ${attempt}/3 failed (error), retrying in 1s...`)
-        await new Promise(resolve => setTimeout(resolve, 1000))
+      if (attempt < maxAttempts) {
+        const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+        console.log(`  Attempt ${attempt}/${maxAttempts} failed (error), retrying in ${Math.ceil(delayMs / 1000)}s...`)
+        await new Promise(resolve => setTimeout(resolve, delayMs))
         continue
       }
       throw err
