@@ -117,6 +117,10 @@ function formatNumber(num) {
 }
 
 async function getGitHubToken() {
+  if (process.env.USER_API_TOKEN) {
+    return process.env.USER_API_TOKEN
+  }
+
   if (process.env.GITHUB_TOKEN) {
     return process.env.GITHUB_TOKEN
   }

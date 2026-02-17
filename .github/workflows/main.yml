@@ -24,6 +24,7 @@ jobs:
     - name: Generate README.md
       run: node generate-stats.js
       env:
+        USER_API_TOKEN: ${{ secrets.USER_API_TOKEN }}
         GITHUB_TOKEN: ${{ github.token }}
     - name: Update README.md
       uses: stefanzweifel/git-auto-commit-action@v5
