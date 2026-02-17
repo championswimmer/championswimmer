@@ -1,6 +1,6 @@
 on:
   schedule:
-    - cron: '0 */12 * * *' # every 12 hours
+    - cron: '0 */12 * * *'
   push:
     branches:
       - master
@@ -8,14 +8,17 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    - name: Generate README.md
-      uses: teoxoy/profile-readme-stats@v1.2
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
       with:
-        token: ${{ secrets.USER_TOKEN }}
-        includeForks: true
+        node-version: 'lts/*'
+    - name: Generate README.md
+      run: node generate-stats.js
+      env:
+        GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
     - name: Update README.md
       run: |
         if [[ "$(git status --porcelain)" != "" ]]; then
@@ -25,4 +28,3 @@ jobs:
         git commit -m "Update README"
         git push
         fi
-
