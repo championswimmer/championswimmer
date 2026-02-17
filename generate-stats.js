@@ -47,6 +47,8 @@ const LANGUAGE_COLORS = {
 }
 
 const CACHE_FILE = path.join(__dirname, 'language-colors-cache.json')
+const STATS_CACHE_FILE = path.join(__dirname, 'stats-cache.json')
+const STATS_CACHE_MAX_AGE = 30 * 24 * 60 * 60 * 1000
 let cachedLanguageColors = null
 
 async function loadLanguageColors() {
@@ -106,6 +108,47 @@ async function loadLanguageColors() {
     console.log('Falling back to hardcoded LANGUAGE_COLORS')
     return LANGUAGE_COLORS
   }
+}
+
+async function loadStatsCache(repoSlug) {
+  const sources = []
+
+  if (repoSlug) {
+    sources.push({
+      type: 'remote',
+      url: `https://raw.githubusercontent.com/${repoSlug}/master/stats-cache.json`
+    })
+  }
+
+  sources.push({ type: 'local', filePath: STATS_CACHE_FILE })
+
+  for (const source of sources) {
+    try {
+      if (source.type === 'remote') {
+        const response = await fetch(source.url)
+        if (!response.ok) continue
+        const cache = await response.json()
+        return { cache, source: source.url }
+      }
+
+      if (fs.existsSync(source.filePath)) {
+        const cacheData = fs.readFileSync(source.filePath, 'utf-8')
+        const cache = JSON.parse(cacheData)
+        return { cache, source: source.filePath }
+      }
+    } catch (e) {
+      continue
+    }
+  }
+
+  return { cache: null, source: null }
+}
+
+function isStatsCacheFresh(cache, lastYear) {
+  if (!cache || !cache.timestamp || !cache.throughYear) return false
+  if (cache.throughYear !== lastYear) return false
+  const age = Date.now() - cache.timestamp
+  return age <= STATS_CACHE_MAX_AGE
 }
 
 function getLanguageColor(languageName, githubColor, languageColors) {
@@ -240,6 +283,7 @@ async function fetchUserInfo(token, fromDate, toDate) {
 
 async function fetchAllTimeContributions(token, years) {
   let totalCommits = 0, totalIssues = 0, totalPRs = 0
+  const yearly = {}
 
   for (const year of years) {
     const from = `${year}-01-01T00:00:00Z`
@@ -260,10 +304,15 @@ async function fetchAllTimeContributions(token, years) {
     totalCommits += cc.totalCommitContributions
     totalIssues += cc.totalIssueContributions
     totalPRs += cc.totalPullRequestContributions
+    yearly[year] = {
+      commits: cc.totalCommitContributions,
+      issues: cc.totalIssueContributions,
+      prs: cc.totalPullRequestContributions
+    }
     console.log(`  ${year}: ${cc.totalCommitContributions} commits, ${cc.totalIssueContributions} issues, ${cc.totalPullRequestContributions} PRs`)
   }
 
-  return { totalCommits, totalIssues, totalPRs }
+  return { totalCommits, totalIssues, totalPRs, yearly }
 }
 
 async function fetchUserReposWithCommits(token, username, userId, since, languageColors) {
@@ -504,14 +553,58 @@ async function main() {
   const accountAge = Math.floor((now - accountCreatedAt) / (365.25 * 24 * 60 * 60 * 1000))
   
   const years = viewer.contributionsCollection.contributionYears
-  console.log(`Fetching all-time contributions for years: ${years.join(', ')}`)
-  const allTime = await fetchAllTimeContributions(token, years)
-  const totalCommitsAllTime = allTime.totalCommits
-  const totalIssuesAllTime = allTime.totalIssues
-  const totalPRsAllTime = allTime.totalPRs
+  const lastYear = new Date().getFullYear() - 1
+  const cacheYear = Math.min(lastYear, 2025)
+  const repoSlug = process.env.GITHUB_REPOSITORY
+  const { cache: statsCache, source: statsCacheSource } = await loadStatsCache(repoSlug)
+  const cacheFresh = isStatsCacheFresh(statsCache, cacheYear)
+  let cachedTotals = null
+  let cachedYears = null
+
+  if (cacheFresh) {
+    cachedTotals = statsCache.totals
+    cachedYears = statsCache.yearly
+    console.log(`Using cached stats from ${statsCacheSource}`)
+  }
+
+  const yearsToFetch = cacheFresh
+    ? years.filter(year => year > cacheYear)
+    : years
+
+  console.log(`Fetching all-time contributions for years: ${yearsToFetch.join(', ') || 'none'}`)
+  const allTime = yearsToFetch.length > 0
+    ? await fetchAllTimeContributions(token, yearsToFetch)
+    : { totalCommits: 0, totalIssues: 0, totalPRs: 0, yearly: {} }
+
+  const totalCommitsAllTime = (cachedTotals?.commits || 0) + allTime.totalCommits
+  const totalIssuesAllTime = (cachedTotals?.issues || 0) + allTime.totalIssues
+  const totalPRsAllTime = (cachedTotals?.prs || 0) + allTime.totalPRs
+  const mergedYearly = {
+    ...(cachedYears || {}),
+    ...(allTime.yearly || {})
+  }
+
   const totalCommitsLastYear = viewer.lastYear.totalCommitContributions
   const totalIssuesLastYear = viewer.lastYear.totalIssueContributions
   const totalPRsLastYear = viewer.lastYear.totalPullRequestContributions
+
+  if (!cacheFresh) {
+    const cachePayload = {
+      timestamp: Date.now(),
+      throughYear: cacheYear,
+      totals: {
+        commits: totalCommitsAllTime,
+        issues: totalIssuesAllTime,
+        prs: totalPRsAllTime
+      },
+      yearly: Object.fromEntries(
+        Object.entries(mergedYearly)
+          .filter(([year]) => Number(year) <= cacheYear)
+      )
+    }
+    fs.writeFileSync(STATS_CACHE_FILE, JSON.stringify(cachePayload, null, 2))
+    console.log(`Stats cache updated at ${STATS_CACHE_FILE}`)
+  }
   
   console.log(`All time - Commits: ${totalCommitsAllTime}, Issues: ${totalIssuesAllTime}, PRs: ${totalPRsAllTime}`)
   console.log(`Last year - Commits: ${totalCommitsLastYear}, Issues: ${totalIssuesLastYear}, PRs: ${totalPRsLastYear}`)
