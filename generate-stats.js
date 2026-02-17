@@ -153,21 +153,27 @@ async function graphqlQuery(token, query, variables = {}) {
         },
         body: JSON.stringify({ query, variables }),
       })
-      
+
+      const requestId = response.headers.get('x-github-request-id')
+      const rateLimitRemaining = response.headers.get('x-ratelimit-remaining')
+      const rateLimitReset = response.headers.get('x-ratelimit-reset')
+
       if (!response.ok) {
         const statusText = response.statusText || 'Request failed'
         if (attempt < maxAttempts) {
           const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
-          console.log(`  Attempt ${attempt}/${maxAttempts} failed (${response.status} ${statusText}), retrying in ${Math.ceil(delayMs / 1000)}s...`)
+          console.log(`  Attempt ${attempt}/${maxAttempts} failed (${response.status} ${statusText}), requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'}, retrying in ${Math.ceil(delayMs / 1000)}s...`)
           await new Promise(resolve => setTimeout(resolve, delayMs))
           continue
         }
-        throw new Error(`GraphQL HTTP ${response.status}: ${statusText}`)
+        throw new Error(`GraphQL HTTP ${response.status}: ${statusText} (requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'})`)
       }
-      
+
       const data = await response.json()
-      
+
       if (data.errors) {
+        const errorsSummary = JSON.stringify(data.errors)
+        console.log(`  GraphQL errors (requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'}, reset=${rateLimitReset || 'n/a'}): ${errorsSummary}`)
         const shouldRetry = isTransientGraphQLError(data.errors)
         if (shouldRetry && attempt < maxAttempts) {
           const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
@@ -175,7 +181,7 @@ async function graphqlQuery(token, query, variables = {}) {
           await new Promise(resolve => setTimeout(resolve, delayMs))
           continue
         }
-        throw new Error(`GraphQL Error: ${JSON.stringify(data.errors)}`)
+        throw new Error(`GraphQL Error: ${errorsSummary}`)
       }
       
       return data.data
