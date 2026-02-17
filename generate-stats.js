@@ -167,7 +167,7 @@ async function graphqlQuery(token, query, variables = {}) {
   }
 }
 
-async function fetchUserInfo(token) {
+async function fetchUserInfo(token, fromDate, toDate) {
   const query = `
     query {
       viewer {
@@ -189,6 +189,16 @@ async function fetchUserInfo(token) {
               }
             }
           }
+        }
+        allTime: contributionsCollection {
+          totalCommitContributions
+          totalIssueContributions
+          totalPullRequestContributions
+        }
+        lastYear: contributionsCollection(from: "${fromDate}", to: "${toDate}") {
+          totalCommitContributions
+          totalIssueContributions
+          totalPullRequestContributions
         }
       }
     }
@@ -413,8 +423,12 @@ function processTemplate(template, data) {
   result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, formatNumber(data.reposOwned))
   result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, formatNumber(data.starsReceived))
   result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, formatNumber(data.starsReceived))
-  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `➕ $\\color{Green}{\\textsf{+${formatNumber(data.totalAdditionsLastYear)}}}$`)
-  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `➖ $\\color{Red}{\\textsf{-${formatNumber(data.totalDeletionsLastYear)}}}$`)
+  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `$\\color{Green}{\\textsf{+${formatNumber(data.totalAdditionsLastYear)}}}$`)
+  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `$\\color{Red}{\\textsf{-${formatNumber(data.totalDeletionsLastYear)}}}$`)
+  result = result.replace(/{{\s*TOTAL_ISSUES_ALL_TIME\s*}}/g, formatNumber(data.totalIssuesAllTime))
+  result = result.replace(/{{\s*TOTAL_PRS_ALL_TIME\s*}}/g, formatNumber(data.totalPRsAllTime))
+  result = result.replace(/{{\s*TOTAL_ISSUES_LAST_YEAR\s*}}/g, formatNumber(data.totalIssuesLastYear))
+  result = result.replace(/{{\s*TOTAL_PRS_LAST_YEAR\s*}}/g, formatNumber(data.totalPRsLastYear))
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
@@ -456,7 +470,13 @@ async function main() {
   const token = await getGitHubToken()
   console.log('GitHub token obtained')
   
-  const userInfo = await fetchUserInfo(token)
+  const oneYearAgo = new Date()
+  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
+  const fromDate = oneYearAgo.toISOString()
+  const toDate = new Date().toISOString()
+  console.log(`Fetching commits since: ${fromDate}`)
+  
+  const userInfo = await fetchUserInfo(token, fromDate, toDate)
   const viewer = userInfo.viewer
   console.log(`Fetching stats for user: ${viewer.login}`)
   
@@ -464,24 +484,22 @@ async function main() {
   const now = new Date()
   const accountAge = Math.floor((now - accountCreatedAt) / (365.25 * 24 * 60 * 60 * 1000))
   
-  const oneYearAgo = new Date()
-  oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1)
-  console.log(`Fetching commits since: ${oneYearAgo.toISOString()}`)
+  const totalCommitsAllTime = viewer.allTime.totalCommitContributions
+  const totalIssuesAllTime = viewer.allTime.totalIssueContributions
+  const totalPRsAllTime = viewer.allTime.totalPullRequestContributions
+  const totalCommitsLastYear = viewer.lastYear.totalCommitContributions
+  const totalIssuesLastYear = viewer.lastYear.totalIssueContributions
+  const totalPRsLastYear = viewer.lastYear.totalPullRequestContributions
+  
+  console.log(`All time - Issues: ${totalIssuesAllTime}, PRs: ${totalPRsAllTime}`)
+  console.log(`Last year - Issues: ${totalIssuesLastYear}, PRs: ${totalPRsLastYear}`)
   
   const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo, languageColors)
   console.log(`Found ${reposWithCommits.length} repos with commits in the last year`)
   
   const totalCommitsLastYear = reposWithCommits.reduce((sum, r) => sum + r.commits, 0)
   console.log(`Total commits in last year: ${totalCommitsLastYear}`)
-  
-  console.log('Fetching all-time commits...')
-  let totalCommitsAllTime = 'N/A'
-  try {
-    totalCommitsAllTime = await fetchAllTimeCommits(token, viewer.login, viewer.id)
-    console.log(`Total commits all-time: ${totalCommitsAllTime}`)
-  } catch (e) {
-    console.log(`Could not fetch all-time commits: ${e.message}`)
-  }
+  console.log(`All-time commits: ${totalCommitsAllTime}`)
   
   const topLanguages = calculateTopLanguages(reposWithCommits, 5, languageColors)
   console.log(`Top languages: ${topLanguages.map(l => `${l.name} (${l.percentage}%)`).join(', ')}`)
@@ -518,6 +536,10 @@ async function main() {
     starsReceived,
     totalAdditionsLastYear,
     totalDeletionsLastYear,
+    totalIssuesAllTime,
+    totalPRsAllTime,
+    totalIssuesLastYear,
+    totalPRsLastYear,
     topLanguages,
     topRepos
   }
