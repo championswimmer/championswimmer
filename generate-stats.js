@@ -279,56 +279,6 @@ async function fetchUserReposWithCommits(token, username, userId, since, languag
   return repos
 }
 
-async function fetchAllTimeCommits(token, username, userId) {
-  let totalCommits = 0
-  let cursor = null
-  let hasNextPage = true
-  
-  while (hasNextPage) {
-    const query = `
-      query($username: String!, $cursor: String) {
-        user(login: $username) {
-          repositories(first: 100, after: $cursor, ownerAffiliations: OWNER, privacy: PUBLIC) {
-            pageInfo {
-              hasNextPage
-              endCursor
-            }
-            nodes {
-              defaultBranchRef {
-                target {
-                  ... on Commit {
-                    history(author: {id: "${userId}"}) {
-                      totalCount
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    `
-    
-    const data = await graphqlQuery(token, query, { username, cursor }, 5, 3000)
-    const repoNodes = data.user.repositories.nodes
-    
-    for (const repo of repoNodes) {
-      const commitCount = repo.defaultBranchRef?.target?.history?.totalCount || 0
-      totalCommits += commitCount
-    }
-    
-    hasNextPage = data.user.repositories.pageInfo.hasNextPage
-    cursor = data.user.repositories.pageInfo.endCursor
-    console.log(`  All-time commits: ${totalCommits} (fetching more...)`)
-    
-    if (hasNextPage) {
-      await new Promise(resolve => setTimeout(resolve, 1000))
-    }
-  }
-  
-  return totalCommits
-}
-
 async function fetchRepoCommitStats(token, owner, repoName, userId, since) {
   let additions = 0
   let deletions = 0
@@ -491,15 +441,11 @@ async function main() {
   const totalIssuesLastYear = viewer.lastYear.totalIssueContributions
   const totalPRsLastYear = viewer.lastYear.totalPullRequestContributions
   
-  console.log(`All time - Issues: ${totalIssuesAllTime}, PRs: ${totalPRsAllTime}`)
-  console.log(`Last year - Issues: ${totalIssuesLastYear}, PRs: ${totalPRsLastYear}`)
+  console.log(`All time - Commits: ${totalCommitsAllTime}, Issues: ${totalIssuesAllTime}, PRs: ${totalPRsAllTime}`)
+  console.log(`Last year - Commits: ${totalCommitsLastYear}, Issues: ${totalIssuesLastYear}, PRs: ${totalPRsLastYear}`)
   
   const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo, languageColors)
   console.log(`Found ${reposWithCommits.length} repos with commits in the last year`)
-  
-  const totalCommitsLastYear = reposWithCommits.reduce((sum, r) => sum + r.commits, 0)
-  console.log(`Total commits in last year: ${totalCommitsLastYear}`)
-  console.log(`All-time commits: ${totalCommitsAllTime}`)
   
   const topLanguages = calculateTopLanguages(reposWithCommits, 5, languageColors)
   console.log(`Top languages: ${topLanguages.map(l => `${l.name} (${l.percentage}%)`).join(', ')}`)
