@@ -42,6 +42,10 @@ const LANGUAGE_COLORS = {
   Default: '#555555'
 }
 
+function formatNumber(num) {
+  return num.toLocaleString()
+}
+
 async function getGitHubToken() {
   if (process.env.GITHUB_TOKEN) {
     return process.env.GITHUB_TOKEN
@@ -269,15 +273,15 @@ function processTemplate(template, data) {
   
   result = result.replace(/{{\s*USERNAME\s*}}/g, data.username)
   result = result.replace(/{{\s*ACCOUNT_AGE\s*}}/g, data.accountAge)
-  result = result.replace(/{{\s*COMMITS\s*}}/g, data.totalCommitsLastYear)
-  result = result.replace(/{{\s*TOTAL_COMMITS_LAST_YEAR\s*}}/g, data.totalCommitsLastYear)
-  result = result.replace(/{{\s*TOTAL_COMMITS_ALL_TIME\s*}}/g, data.totalCommitsAllTime)
-  result = result.replace(/{{\s*REPOS_OWNED\s*}}/g, data.reposOwned)
-  result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, data.reposOwned)
-  result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, data.starsReceived)
-  result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, data.starsReceived)
-  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, data.totalAdditionsLastYear)
-  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, data.totalDeletionsLastYear)
+  result = result.replace(/{{\s*COMMITS\s*}}/g, formatNumber(data.totalCommitsLastYear))
+  result = result.replace(/{{\s*TOTAL_COMMITS_LAST_YEAR\s*}}/g, formatNumber(data.totalCommitsLastYear))
+  result = result.replace(/{{\s*TOTAL_COMMITS_ALL_TIME\s*}}/g, formatNumber(data.totalCommitsAllTime))
+  result = result.replace(/{{\s*REPOS_OWNED\s*}}/g, formatNumber(data.reposOwned))
+  result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, formatNumber(data.reposOwned))
+  result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, formatNumber(data.starsReceived))
+  result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, formatNumber(data.starsReceived))
+  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `➕ <font color="green">+${formatNumber(data.totalAdditionsLastYear)}</font>`)
+  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `➖ <font color="red">-${formatNumber(data.totalDeletionsLastYear)}</font>`)
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
@@ -300,9 +304,9 @@ function processTemplate(template, data) {
       let item = repoTemplate.replace(/^\n/, '')
       item = item.replace(/{{\s*REPO_NAME\s*}}/g, repo.name)
       item = item.replace(/{{\s*REPO_URL\s*}}/g, repo.url)
-      item = item.replace(/{{\s*REPO_COMMITS\s*}}/g, repo.commits)
-      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, repo.additions)
-      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, repo.deletions)
+      item = item.replace(/{{\s*REPO_COMMITS\s*}}/g, formatNumber(repo.commits))
+      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, `<font color="green">+${formatNumber(repo.additions)}</font>`)
+      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, `<font color="red">-${formatNumber(repo.deletions)}</font>`)
       return item.trimEnd()
     }).join('\n')
     result = result.replace(/{{\s*REPO_TEMPLATE_START\s*}}[\s\S]*?{{\s*REPO_TEMPLATE_END\s*}}/, repoItems)

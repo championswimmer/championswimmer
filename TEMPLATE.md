@@ -4,15 +4,11 @@ Joined Github **{{ ACCOUNT_AGE }}** years ago.
 
 ## 📊 Stats
 
-### All Time
-- 📦 **{{ REPOS_OWNED_ALL_TIME }}** public repositories
-- 🔥 **{{ TOTAL_COMMITS_ALL_TIME }}** total commits  
-- ⭐ **{{ STARS_ALL_TIME }}** stars received
-
-### Last Year
-- 🔥 **{{ COMMITS }}** commits
-- ➕ **{{ TOTAL_ADDITIONS_LAST_YEAR }}** lines added
-- ➖ **{{ TOTAL_DELETIONS_LAST_YEAR }}** lines removed
+| All Time | Last Year |
+|----------|-----------|
+| 📦 **{{ REPOS_OWNED_ALL_TIME }}** public repos | 🔥 **{{ COMMITS }}** commits |
+| 🔥 **{{ TOTAL_COMMITS_ALL_TIME }}** commits | {{ TOTAL_ADDITIONS_LAST_YEAR }} lines added |
+| ⭐ **{{ STARS_ALL_TIME }}** stars | {{ TOTAL_DELETIONS_LAST_YEAR }} lines removed |
 
 ## 📝 Top Languages (Last Year)
 
@@ -21,5 +17,5 @@ Joined Github **{{ ACCOUNT_AGE }}** years ago.
 ## 🚀 Most Active Projects (Last Year)
 
 {{ REPO_TEMPLATE_START }}
-- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits, +{{ REPO_ADDITIONS }} / -{{ REPO_DELETIONS }}
+- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits, {{ REPO_ADDITIONS }} / {{ REPO_DELETIONS }}
 {{ REPO_TEMPLATE_END }}

@@ -4,15 +4,11 @@ Joined Github **14** years ago.
 
 ## 📊 Stats
 
-### All Time
-- 📦 **383** public repositories
-- 🔥 **1144** total commits  
-- ⭐ **892** stars received
-
-### Last Year
-- 🔥 **789** commits
-- ➕ **436325** lines added
-- ➖ **44183** lines removed
+| All Time | Last Year |
+|----------|-----------|
+| 📦 **383** public repos | 🔥 **790** commits |
+| 🔥 **1,145** commits | ➕ <font color="green">+436,325</font> lines added |
+| ⭐ **892** stars | ➖ <font color="red">-44,183</font> lines removed |
 
 ## 📝 Top Languages (Last Year)
 
@@ -20,8 +16,8 @@ Joined Github **14** years ago.
 
 ## 🚀 Most Active Projects (Last Year)
 
-- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 94 commits, +33268 / -9128
-- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, +7824 / -1912
-- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 78 commits, +10090 / -3134
-- [TwoFac](https://github.com/championswimmer/TwoFac) - 58 commits, +14454 / -3862
-- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, +370689 / -26147
+- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 94 commits, <font color="green">+33,268</font> / <font color="red">-9,128</font>
+- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, <font color="green">+7,824</font> / <font color="red">-1,912</font>
+- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 78 commits, <font color="green">+10,090</font> / <font color="red">-3,134</font>
+- [TwoFac](https://github.com/championswimmer/TwoFac) - 58 commits, <font color="green">+14,454</font> / <font color="red">-3,862</font>
+- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, <font color="green">+370,689</font> / <font color="red">-26,147</font>
