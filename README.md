@@ -6,10 +6,10 @@ Joined Github **14** years ago.
 
 | All Time | Last Year |
 |----------|-----------|
-| 📦 **383** public repos | 🔥 **1,150** commits |
-| 🔥 **1,150** commits | 📝 **47** issues |
-| 📋 **47** issues | 🔀 **44** PRs |
-| 🔀 **44** PRs | $\color{Green}{\textsf{+436,325}}$ lines added |
+| 📦 **383** public repos | 🔥 **1,151** commits |
+| 🔥 **12,110** commits | 📝 **47** issues |
+| 📋 **728** issues | 🔀 **44** PRs |
+| 🔀 **566** PRs | $\color{Green}{\textsf{+436,325}}$ lines added |
 | ⭐ **892** stars | $\color{Red}{\textsf{-44,183}}$ lines removed |
 
 ## 📝 Top Languages (Last Year)

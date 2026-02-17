@@ -190,10 +190,8 @@ async function fetchUserInfo(token, fromDate, toDate) {
             }
           }
         }
-        allTime: contributionsCollection {
-          totalCommitContributions
-          totalIssueContributions
-          totalPullRequestContributions
+        contributionsCollection {
+          contributionYears
         }
         lastYear: contributionsCollection(from: "${fromDate}", to: "${toDate}") {
           totalCommitContributions
@@ -204,6 +202,34 @@ async function fetchUserInfo(token, fromDate, toDate) {
     }
   `
   return graphqlQuery(token, query)
+}
+
+async function fetchAllTimeContributions(token, years) {
+  let totalCommits = 0, totalIssues = 0, totalPRs = 0
+
+  for (const year of years) {
+    const from = `${year}-01-01T00:00:00Z`
+    const to = `${year}-12-31T23:59:59Z`
+    const query = `
+      query {
+        viewer {
+          contributionsCollection(from: "${from}", to: "${to}") {
+            totalCommitContributions
+            totalIssueContributions
+            totalPullRequestContributions
+          }
+        }
+      }
+    `
+    const data = await graphqlQuery(token, query)
+    const cc = data.viewer.contributionsCollection
+    totalCommits += cc.totalCommitContributions
+    totalIssues += cc.totalIssueContributions
+    totalPRs += cc.totalPullRequestContributions
+    console.log(`  ${year}: ${cc.totalCommitContributions} commits, ${cc.totalIssueContributions} issues, ${cc.totalPullRequestContributions} PRs`)
+  }
+
+  return { totalCommits, totalIssues, totalPRs }
 }
 
 async function fetchUserReposWithCommits(token, username, userId, since, languageColors) {
@@ -434,9 +460,12 @@ async function main() {
   const now = new Date()
   const accountAge = Math.floor((now - accountCreatedAt) / (365.25 * 24 * 60 * 60 * 1000))
   
-  const totalCommitsAllTime = viewer.allTime.totalCommitContributions
-  const totalIssuesAllTime = viewer.allTime.totalIssueContributions
-  const totalPRsAllTime = viewer.allTime.totalPullRequestContributions
+  const years = viewer.contributionsCollection.contributionYears
+  console.log(`Fetching all-time contributions for years: ${years.join(', ')}`)
+  const allTime = await fetchAllTimeContributions(token, years)
+  const totalCommitsAllTime = allTime.totalCommits
+  const totalIssuesAllTime = allTime.totalIssues
+  const totalPRsAllTime = allTime.totalPRs
   const totalCommitsLastYear = viewer.lastYear.totalCommitContributions
   const totalIssuesLastYear = viewer.lastYear.totalIssueContributions
   const totalPRsLastYear = viewer.lastYear.totalPullRequestContributions
