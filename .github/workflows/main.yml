@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - master
+
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -18,7 +22,7 @@ jobs:
     - name: Generate README.md
       run: node generate-stats.js
       env:
-        GITHUB_TOKEN: ${{ secrets.USER_TOKEN }}
+        GITHUB_TOKEN: ${{ github.token }}
     - name: Update README.md
       uses: stefanzweifel/git-auto-commit-action@v5
       with:
