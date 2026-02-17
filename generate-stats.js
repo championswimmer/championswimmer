@@ -425,7 +425,7 @@ function generateLanguageBar(lang) {
   const percentage = Math.max(0, Math.min(100, Math.round(lang.percentage)))
   const barColor = lang.color.replace('#', '')
   const blockCount = Math.max(1, Math.round(percentage / 5))
-  const blocks = encodeURIComponent('|'.repeat(blockCount))
+  const blocks = encodeURIComponent('█'.repeat(blockCount))
   return `![${lang.name}](https://img.shields.io/badge/${blocks}-${barColor}?style=flat&label=&labelColor=555&color=${barColor})`
 }
 
@@ -447,7 +447,7 @@ function processTemplate(template, data) {
   result = result.replace(/{{\s*TOTAL_PRS_ALL_TIME\s*}}/g, formatNumber(data.totalPRsAllTime))
   result = result.replace(/{{\s*TOTAL_ISSUES_LAST_YEAR\s*}}/g, formatNumber(data.totalIssuesLastYear))
   result = result.replace(/{{\s*TOTAL_PRS_LAST_YEAR\s*}}/g, formatNumber(data.totalPRsLastYear))
-  result = result.replace(/{{\s*TOP_LANGUAGES\s*}}/g, data.topLanguagesSummary)
+  result = result.replace(/{{\s*TOP_LANGUAGES_ROWS\s*}}/g, data.topLanguagesRows)
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
@@ -559,9 +559,30 @@ async function main() {
     totalIssuesLastYear,
     totalPRsLastYear,
     topLanguages,
-    topLanguagesSummary: topLanguages
-      .map(lang => `${generateLanguageBadge(lang)} ${generateLanguageBar(lang)}`)
-      .join('<br>'),
+    topLanguagesRows: (() => {
+      const rows = []
+      const allTimeRows = [
+        `📦 **${formatNumber(viewer.repositories.totalCount)}** public repos`,
+        `🔥 **${formatNumber(totalCommitsAllTime)}** commits`,
+        `📋 **${formatNumber(totalIssuesAllTime)}** issues`,
+        `🔀 **${formatNumber(totalPRsAllTime)}** PRs`,
+        `⭐ **${formatNumber(starsReceived)}** stars`
+      ]
+      const lastYearRows = [
+        `🔥 **${formatNumber(totalCommitsLastYear)}** commits`,
+        `📝 **${formatNumber(totalIssuesLastYear)}** issues`,
+        `🔀 **${formatNumber(totalPRsLastYear)}** PRs`,
+        `${`$\\color{Green}{\\textsf{+${formatNumber(totalAdditionsLastYear)}}}$`} lines added`,
+        `${`$\\color{Red}{\\textsf{-${formatNumber(totalDeletionsLastYear)}}}$`} lines removed`
+      ]
+
+      for (let i = 0; i < 5; i++) {
+        const lang = topLanguages[i]
+        const langCell = lang ? `${generateLanguageBadge(lang)} ${generateLanguageBar(lang)}` : ''
+        rows.push(`| ${allTimeRows[i]} | ${lastYearRows[i]} | ${langCell} |`)
+      }
+      return rows.join('\n')
+    })(),
     topRepos
   }
   

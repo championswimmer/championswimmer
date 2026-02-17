@@ -6,11 +6,7 @@ Joined Github **{{ ACCOUNT_AGE }}** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **{{ REPOS_OWNED_ALL_TIME }}** public repos | 🔥 **{{ COMMITS }}** commits | {{ TOP_LANGUAGES }} |
-| 🔥 **{{ TOTAL_COMMITS_ALL_TIME }}** commits | 📝 **{{ TOTAL_ISSUES_LAST_YEAR }}** issues | |
-| 📋 **{{ TOTAL_ISSUES_ALL_TIME }}** issues | 🔀 **{{ TOTAL_PRS_LAST_YEAR }}** PRs | |
-| 🔀 **{{ TOTAL_PRS_ALL_TIME }}** PRs | {{ TOTAL_ADDITIONS_LAST_YEAR }} lines added | |
-| ⭐ **{{ STARS_ALL_TIME }}** stars | {{ TOTAL_DELETIONS_LAST_YEAR }} lines removed | |
+{{ TOP_LANGUAGES_ROWS }}
 
 ## 🚀 Most Active Projects (Last Year)
 
