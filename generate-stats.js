@@ -82,6 +82,11 @@ async function fetchUserInfo(token) {
         id
         login
         createdAt
+        contributionsCollection {
+          totalCommitContributions
+          totalRepositoriesWithContributedCommits
+          restrictedContributionsCount
+        }
         repositories(ownerAffiliations: OWNER, privacy: PUBLIC, first: 100) {
           totalCount
           nodes {
@@ -162,7 +167,9 @@ async function fetchUserReposWithCommits(token, username, userId, since) {
           name: repo.name,
           url: repo.url,
           commits: commitCount,
-          languages
+          languages,
+          additions: 0,
+          deletions: 0
         })
       }
     }
@@ -173,6 +180,53 @@ async function fetchUserReposWithCommits(token, username, userId, since) {
   }
   
   return repos
+}
+
+async function fetchRepoCommitStats(token, owner, repoName, userId, since) {
+  let additions = 0
+  let deletions = 0
+  let cursor = null
+  let hasNextPage = true
+  
+  while (hasNextPage) {
+    const query = `
+      query($owner: String!, $repoName: String!, $cursor: String) {
+        repository(owner: $owner, name: $repoName) {
+          defaultBranchRef {
+            target {
+              ... on Commit {
+                history(first: 100, after: $cursor, since: "${since.toISOString()}", author: {id: "${userId}"}) {
+                  pageInfo {
+                    hasNextPage
+                    endCursor
+                  }
+                  nodes {
+                    additions
+                    deletions
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    `
+    
+    const data = await graphqlQuery(token, query, { owner, repoName, cursor })
+    const history = data.repository?.defaultBranchRef?.target?.history
+    
+    if (!history) break
+    
+    for (const commit of history.nodes) {
+      additions += commit.additions || 0
+      deletions += commit.deletions || 0
+    }
+    
+    hasNextPage = history.pageInfo.hasNextPage
+    cursor = history.pageInfo.endCursor
+  }
+  
+  return { additions, deletions }
 }
 
 function calculateTopLanguages(repos, topN = 5) {
@@ -215,13 +269,19 @@ function processTemplate(template, data) {
   
   result = result.replace(/{{\s*USERNAME\s*}}/g, data.username)
   result = result.replace(/{{\s*ACCOUNT_AGE\s*}}/g, data.accountAge)
-  result = result.replace(/{{\s*COMMITS\s*}}/g, data.totalCommits)
+  result = result.replace(/{{\s*COMMITS\s*}}/g, data.totalCommitsLastYear)
+  result = result.replace(/{{\s*TOTAL_COMMITS_LAST_YEAR\s*}}/g, data.totalCommitsLastYear)
+  result = result.replace(/{{\s*TOTAL_COMMITS_ALL_TIME\s*}}/g, data.totalCommitsAllTime)
   result = result.replace(/{{\s*REPOS_OWNED\s*}}/g, data.reposOwned)
+  result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, data.reposOwned)
   result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, data.starsReceived)
+  result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, data.starsReceived)
+  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, data.totalAdditionsLastYear)
+  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, data.totalDeletionsLastYear)
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
-    const langTemplate = langTemplateMatch[1]
+    const langTemplate = langTemplateMatch[1].trim()
     const langBadges = data.topLanguages.map(lang => {
       let badge = langTemplate
       badge = badge.replace(/{{\s*LANG_NAME\s*}}/g, lang.name)
@@ -229,7 +289,7 @@ function processTemplate(template, data) {
       badge = badge.replace(/{{\s*LANG_COLOR\s*}}/g, lang.color)
       badge = badge.replace(/{{\s*LANG_BADGE\s*}}/g, generateLanguageBadge(lang))
       return badge
-    }).join('')
+    }).join(' ')
     result = result.replace(/{{\s*LANGUAGE_TEMPLATE_START\s*}}[\s\S]*?{{\s*LANGUAGE_TEMPLATE_END\s*}}/, langBadges)
   }
   
@@ -237,12 +297,14 @@ function processTemplate(template, data) {
   if (repoTemplateMatch) {
     const repoTemplate = repoTemplateMatch[1]
     const repoItems = data.topRepos.map(repo => {
-      let item = repoTemplate
+      let item = repoTemplate.replace(/^\n/, '')
       item = item.replace(/{{\s*REPO_NAME\s*}}/g, repo.name)
       item = item.replace(/{{\s*REPO_URL\s*}}/g, repo.url)
       item = item.replace(/{{\s*REPO_COMMITS\s*}}/g, repo.commits)
-      return item
-    }).join('')
+      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, repo.additions)
+      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, repo.deletions)
+      return item.trimEnd()
+    }).join('\n')
     result = result.replace(/{{\s*REPO_TEMPLATE_START\s*}}[\s\S]*?{{\s*REPO_TEMPLATE_END\s*}}/, repoItems)
   }
   
@@ -270,8 +332,11 @@ async function main() {
   const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo)
   console.log(`Found ${reposWithCommits.length} repos with commits in the last year`)
   
-  const totalCommits = reposWithCommits.reduce((sum, r) => sum + r.commits, 0)
-  console.log(`Total commits in last year: ${totalCommits}`)
+  const totalCommitsLastYear = reposWithCommits.reduce((sum, r) => sum + r.commits, 0)
+  console.log(`Total commits in last year: ${totalCommitsLastYear}`)
+  
+  const totalCommitsAllTime = viewer.contributionsCollection.totalCommitContributions
+  console.log(`Total commits all-time: ${totalCommitsAllTime}`)
   
   const topLanguages = calculateTopLanguages(reposWithCommits, 5)
   console.log(`Top languages: ${topLanguages.map(l => `${l.name} (${l.percentage}%)`).join(', ')}`)
@@ -279,6 +344,22 @@ async function main() {
   const topRepos = reposWithCommits
     .sort((a, b) => b.commits - a.commits)
     .slice(0, 5)
+  
+  console.log('Fetching additions/deletions for top repos...')
+  let totalAdditionsLastYear = 0
+  let totalDeletionsLastYear = 0
+  
+  for (const repo of topRepos) {
+    console.log(`  Fetching stats for ${repo.name}...`)
+    const stats = await fetchRepoCommitStats(token, viewer.login, repo.name, viewer.id, oneYearAgo)
+    repo.additions = stats.additions
+    repo.deletions = stats.deletions
+    totalAdditionsLastYear += stats.additions
+    totalDeletionsLastYear += stats.deletions
+    console.log(`    +${stats.additions} / -${stats.deletions} lines`)
+  }
+  
+  console.log(`Total additions: ${totalAdditionsLastYear}, Total deletions: ${totalDeletionsLastYear}`)
   console.log(`Top repos: ${topRepos.map(r => `${r.name} (${r.commits})`).join(', ')}`)
   
   const starsReceived = viewer.repositories.nodes.reduce((sum, r) => sum + r.stargazerCount, 0)
@@ -286,9 +367,12 @@ async function main() {
   const statsData = {
     username: viewer.login,
     accountAge,
-    totalCommits,
+    totalCommitsLastYear,
+    totalCommitsAllTime,
     reposOwned: viewer.repositories.totalCount,
     starsReceived,
+    totalAdditionsLastYear,
+    totalDeletionsLastYear,
     topLanguages,
     topRepos
   }
@@ -310,9 +394,10 @@ async function main() {
 
 ## 📊 Stats for the last year
 
-- 🔥 **{{ COMMITS }}** commits
+- 🔥 **{{ TOTAL_COMMITS_LAST_YEAR }}** commits
 - 📦 **{{ REPOS_OWNED }}** repositories
-- ⭐ **{{ STARS_RECEIVED }}** stars received
+- ⭐ **{{ STARS_ALL_TIME }}** stars received
+- 📈 **+{{ TOTAL_ADDITIONS_LAST_YEAR }}** / **-{{ TOTAL_DELETIONS_LAST_YEAR }}** lines
 
 ## 📝 Top Languages
 
@@ -323,7 +408,7 @@ async function main() {
 ## 🚀 Top Repositories
 
 {{ REPO_TEMPLATE_START }}
-- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits
+- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits (+{{ REPO_ADDITIONS }} / -{{ REPO_DELETIONS }})
 {{ REPO_TEMPLATE_END }}
 `
   }

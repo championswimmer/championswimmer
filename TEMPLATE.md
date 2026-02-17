@@ -2,16 +2,24 @@
 
 Joined Github **{{ ACCOUNT_AGE }}** years ago.
 
-In the last year I pushed **{{ COMMITS }}** commits. I have **{{ STARS_RECEIVED }}** stars across **{{ REPOS_OWNED }}** personal projects.
+## 📊 Stats
 
-Most used languages across my projects:
+### All Time
+- 📦 **{{ REPOS_OWNED_ALL_TIME }}** public repositories
+- 🔥 **{{ TOTAL_COMMITS_ALL_TIME }}** total commits  
+- ⭐ **{{ STARS_ALL_TIME }}** stars received
 
-{{ LANGUAGE_TEMPLATE_START }}
-{{ LANG_BADGE }}
-{{ LANGUAGE_TEMPLATE_END }}
+### Last Year
+- 🔥 **{{ COMMITS }}** commits
+- ➕ **{{ TOTAL_ADDITIONS_LAST_YEAR }}** lines added
+- ➖ **{{ TOTAL_DELETIONS_LAST_YEAR }}** lines removed
 
-## Top 5 Repositories
+## 📝 Top Languages (Last Year)
+
+{{ LANGUAGE_TEMPLATE_START }}{{ LANG_BADGE }} {{ LANGUAGE_TEMPLATE_END }}
+
+## 🚀 Most Active Projects (Last Year)
 
 {{ REPO_TEMPLATE_START }}
-- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits
+- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits, +{{ REPO_ADDITIONS }} / -{{ REPO_DELETIONS }}
 {{ REPO_TEMPLATE_END }}
