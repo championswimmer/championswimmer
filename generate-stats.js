@@ -188,7 +188,7 @@ function isTransientGraphQLError(errors) {
 }
 
 async function graphqlQuery(token, query, variables = {}) {
-  const maxAttempts = 5
+  const maxAttempts = 7
   for (let attempt = 1; attempt <= maxAttempts; attempt++) {
     try {
       const response = await fetch('https://api.github.com/graphql', {
@@ -208,7 +208,7 @@ async function graphqlQuery(token, query, variables = {}) {
       if (!response.ok) {
         const statusText = response.statusText || 'Request failed'
         if (attempt < maxAttempts) {
-          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 20000)
           console.log(`  Attempt ${attempt}/${maxAttempts} failed (${response.status} ${statusText}), requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'}, retrying in ${Math.ceil(delayMs / 1000)}s...`)
           await new Promise(resolve => setTimeout(resolve, delayMs))
           continue
@@ -223,7 +223,7 @@ async function graphqlQuery(token, query, variables = {}) {
         console.log(`  GraphQL errors (requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'}, reset=${rateLimitReset || 'n/a'}): ${errorsSummary}`)
         const shouldRetry = isTransientGraphQLError(data.errors)
         if (shouldRetry && attempt < maxAttempts) {
-          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+          const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 20000)
           console.log(`  Attempt ${attempt}/${maxAttempts} failed (transient API error), retrying in ${Math.ceil(delayMs / 1000)}s...`)
           await new Promise(resolve => setTimeout(resolve, delayMs))
           continue
@@ -234,7 +234,7 @@ async function graphqlQuery(token, query, variables = {}) {
       return data.data
     } catch (err) {
       if (attempt < maxAttempts) {
-        const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 10000)
+        const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 20000)
         console.log(`  Attempt ${attempt}/${maxAttempts} failed (error), retrying in ${Math.ceil(delayMs / 1000)}s...`)
         await new Promise(resolve => setTimeout(resolve, delayMs))
         continue
@@ -356,7 +356,16 @@ async function fetchUserReposWithCommits(token, username, userId, since, languag
       }
     `
     
-    const data = await graphqlQuery(token, query, { username, cursor })
+    let data
+    try {
+      data = await graphqlQuery(token, query, { username, cursor })
+    } catch (err) {
+      if (String(err.message || '').includes('GraphQL HTTP 502') || String(err.message || '').includes('GraphQL HTTP 503') || String(err.message || '').includes('GraphQL HTTP 504')) {
+        console.log('  GraphQL gateway error while fetching repos. Using partial repo list.')
+        break
+      }
+      throw err
+    }
     const repoNodes = data.user.repositories.nodes
     
     for (const repo of repoNodes) {
@@ -418,7 +427,16 @@ async function fetchRepoCommitStats(token, owner, repoName, userId, since) {
       }
     `
     
-    const data = await graphqlQuery(token, query, { owner, repoName, cursor })
+    let data
+    try {
+      data = await graphqlQuery(token, query, { owner, repoName, cursor })
+    } catch (err) {
+      if (String(err.message || '').includes('GraphQL HTTP 502') || String(err.message || '').includes('GraphQL HTTP 503') || String(err.message || '').includes('GraphQL HTTP 504')) {
+        console.log(`    GraphQL gateway error for ${repoName}. Skipping additions/deletions.`)
+        break
+      }
+      throw err
+    }
     const history = data.repository?.defaultBranchRef?.target?.history
     
     if (!history) break
@@ -468,14 +486,6 @@ function generateLanguageBadge(lang) {
   const encodedColor = encodeURIComponent(lang.color)
   const encodedMessage = encodeURIComponent(`${lang.name} ${lang.percentage}%`)
   return `![${lang.name}](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=${encodedColor}&message=${encodedMessage})`
-}
-
-function generateLanguageBar(lang) {
-  const percentage = Math.max(0, Math.min(100, Math.round(lang.percentage)))
-  const barColor = lang.color.replace('#', '')
-  const blockCount = Math.max(1, Math.round(percentage / 5))
-  const blocks = encodeURIComponent('█'.repeat(blockCount))
-  return `![${lang.name}](https://img.shields.io/badge/${blocks}-${barColor}?style=flat&label=&labelColor=555&color=${barColor})`
 }
 
 function processTemplate(template, data) {
@@ -671,7 +681,7 @@ async function main() {
 
       for (let i = 0; i < 5; i++) {
         const lang = topLanguages[i]
-        const langCell = lang ? `${generateLanguageBadge(lang)} ${generateLanguageBar(lang)}` : ''
+        const langCell = lang ? `${generateLanguageBadge(lang)}` : ''
         rows.push(`| ${allTimeRows[i]} | ${lastYearRows[i]} | ${langCell} |`)
       }
       return rows.join('\n')
