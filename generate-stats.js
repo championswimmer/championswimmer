@@ -421,6 +421,14 @@ function generateLanguageBadge(lang) {
   return `![${lang.name}](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=${encodedColor}&message=${encodedMessage})`
 }
 
+function generateLanguageBar(lang) {
+  const percentage = Math.max(0, Math.min(100, Math.round(lang.percentage)))
+  const barColor = lang.color.replace('#', '')
+  const blockCount = Math.max(1, Math.round(percentage / 5))
+  const blocks = encodeURIComponent('|'.repeat(blockCount))
+  return `![${lang.name}](https://img.shields.io/badge/${blocks}-${barColor}?style=flat&label=&labelColor=555&color=${barColor})`
+}
+
 function processTemplate(template, data) {
   let result = template
   
@@ -439,6 +447,7 @@ function processTemplate(template, data) {
   result = result.replace(/{{\s*TOTAL_PRS_ALL_TIME\s*}}/g, formatNumber(data.totalPRsAllTime))
   result = result.replace(/{{\s*TOTAL_ISSUES_LAST_YEAR\s*}}/g, formatNumber(data.totalIssuesLastYear))
   result = result.replace(/{{\s*TOTAL_PRS_LAST_YEAR\s*}}/g, formatNumber(data.totalPRsLastYear))
+  result = result.replace(/{{\s*TOP_LANGUAGES\s*}}/g, data.topLanguagesSummary)
   
   const langTemplateMatch = result.match(/{{\s*LANGUAGE_TEMPLATE_START\s*}}([\s\S]*?){{\s*LANGUAGE_TEMPLATE_END\s*}}/)
   if (langTemplateMatch) {
@@ -550,6 +559,9 @@ async function main() {
     totalIssuesLastYear,
     totalPRsLastYear,
     topLanguages,
+    topLanguagesSummary: topLanguages
+      .map(lang => `${generateLanguageBadge(lang)} ${generateLanguageBar(lang)}`)
+      .join('<br>'),
     topRepos
   }
   
