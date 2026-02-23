@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **383** public repos | 🔥 **1,085** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2048%25) |
-| 🔥 **12,532** commits | 📝 **46** issues | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2024%25) |
+| 📦 **383** public repos | 🔥 **1,086** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2048%25) |
+| 🔥 **12,533** commits | 📝 **46** issues | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2024%25) |
 | 📋 **737** issues | 🔀 **44** PRs | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2011%25) |
-| 🔀 **575** PRs | $\color{Green}{\textsf{+498,453}}$ lines added | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%209%25) |
-| ⭐ **892** stars | $\color{Red}{\textsf{-53,665}}$ lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%208%25) |
+| 🔀 **575** PRs | $\color{Green}{\textsf{+494,808}}$ lines added | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%209%25) |
+| ⭐ **892** stars | $\color{Red}{\textsf{-52,398}}$ lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%209%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
@@ -23,7 +23,7 @@ Joined Github **14** years ago.
 - [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, $\color{Green}{\textsf{+370,689}}$ / $\color{Red}{\textsf{-26,147}}$
 - [metromap.io](https://github.com/championswimmer/metromap.io) - 51 commits, $\color{Green}{\textsf{+25,163}}$ / $\color{Red}{\textsf{-3,897}}$
 - [goals.cash-legacy](https://github.com/championswimmer/goals.cash-legacy) - 47 commits, $\color{Green}{\textsf{+13,981}}$ / $\color{Red}{\textsf{-1,512}}$
-- [oh-my-zsh](https://github.com/championswimmer/oh-my-zsh) - 34 commits, $\color{Green}{\textsf{+5,609}}$ / $\color{Red}{\textsf{-1,665}}$
+- [championswimmer](https://github.com/championswimmer/championswimmer) - 35 commits, $\color{Green}{\textsf{+1,964}}$ / $\color{Red}{\textsf{-398}}$
 
 ## 🤝 Connect with me
 
