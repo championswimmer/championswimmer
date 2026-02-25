@@ -255,7 +255,6 @@ async function fetchUserInfo(token, fromDate, toDate) {
           totalCount
           nodes {
             name
-            stargazerCount
             languages(first: 10) {
               edges {
                 size
@@ -313,6 +312,37 @@ async function fetchAllTimeContributions(token, years) {
   }
 
   return { totalCommits, totalIssues, totalPRs, yearly }
+}
+
+async function fetchTotalStars(token) {
+  let totalStars = 0
+  let cursor = null
+  let hasNextPage = true
+
+  while (hasNextPage) {
+    const query = `
+      query($cursor: String) {
+        viewer {
+          repositories(first: 100, after: $cursor, ownerAffiliations: OWNER, privacy: PUBLIC) {
+            pageInfo {
+              hasNextPage
+              endCursor
+            }
+            nodes {
+              stargazerCount
+            }
+          }
+        }
+      }
+    `
+    const data = await graphqlQuery(token, query, { cursor })
+    const repoPage = data.viewer.repositories
+    totalStars += repoPage.nodes.reduce((sum, r) => sum + r.stargazerCount, 0)
+    hasNextPage = repoPage.pageInfo.hasNextPage
+    cursor = repoPage.pageInfo.endCursor
+  }
+
+  return totalStars
 }
 
 async function fetchUserReposWithCommits(token, username, userId, since, languageColors) {
@@ -646,7 +676,9 @@ async function main() {
   console.log(`Total additions: ${totalAdditionsLastYear}, Total deletions: ${totalDeletionsLastYear}`)
   console.log(`Top repos: ${topRepos.map(r => `${r.name} (${r.commits})`).join(', ')}`)
   
-  const starsReceived = viewer.repositories.nodes.reduce((sum, r) => sum + r.stargazerCount, 0)
+  console.log('Fetching total stars across all repos...')
+  const starsReceived = await fetchTotalStars(token)
+  console.log(`Total stars received: ${starsReceived}`)
   
   const statsData = {
     username: viewer.login,
