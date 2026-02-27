@@ -6,24 +6,24 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **383** public repos | 🔥 **1,145** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2046%25) |
-| 🔥 **12,593** commits | 📝 **49** issues | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2023%25) |
-| 📋 **740** issues | 🔀 **44** PRs | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2013%25) |
-| 🔀 **575** PRs | $\color{Green}{\textsf{+497,068}}$ lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%209%25) |
-| ⭐ **5,555** stars | $\color{Red}{\textsf{-52,764}}$ lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%209%25) |
+| 📦 **383** public repos | 🔥 **1,166** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2045%25) |
+| 🔥 **12,614** commits | 📝 **49** issues | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2023%25) |
+| 📋 **740** issues | 🔀 **44** PRs | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2014%25) |
+| 🔀 **575** PRs | $\color{Green}{\textsf{+498,501}}$ lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%209%25) |
+| ⭐ **5,555** stars | $\color{Red}{\textsf{-53,233}}$ lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%209%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
+- [TwoFac](https://github.com/championswimmer/TwoFac) - 94 commits, $\color{Green}{\textsf{+17,485}}$ / $\color{Red}{\textsf{-4,507}}$
 - [env.sync.local](https://github.com/championswimmer/env.sync.local) - 94 commits, $\color{Green}{\textsf{+33,268}}$ / $\color{Red}{\textsf{-9,128}}$
 - [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, $\color{Green}{\textsf{+7,824}}$ / $\color{Red}{\textsf{-1,912}}$
-- [TwoFac](https://github.com/championswimmer/TwoFac) - 82 commits, $\color{Green}{\textsf{+16,059}}$ / $\color{Red}{\textsf{-4,045}}$
 - [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 79 commits, $\color{Green}{\textsf{+10,177}}$ / $\color{Red}{\textsf{-3,134}}$
 - [midpoint-place-landing-page](https://github.com/championswimmer/midpoint-place-landing-page) - 54 commits, $\color{Green}{\textsf{+11,981}}$ / $\color{Red}{\textsf{-1,456}}$
 - [app.midpoint.place](https://github.com/championswimmer/app.midpoint.place) - 54 commits, $\color{Green}{\textsf{+5,304}}$ / $\color{Red}{\textsf{-952}}$
 - [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, $\color{Green}{\textsf{+370,689}}$ / $\color{Red}{\textsf{-26,147}}$
 - [metromap.io](https://github.com/championswimmer/metromap.io) - 54 commits, $\color{Green}{\textsf{+25,761}}$ / $\color{Red}{\textsf{-4,052}}$
 - [goals.cash-legacy](https://github.com/championswimmer/goals.cash-legacy) - 47 commits, $\color{Green}{\textsf{+13,981}}$ / $\color{Red}{\textsf{-1,512}}$
-- [championswimmer](https://github.com/championswimmer/championswimmer) - 40 commits, $\color{Green}{\textsf{+2,024}}$ / $\color{Red}{\textsf{-426}}$
+- [championswimmer](https://github.com/championswimmer/championswimmer) - 41 commits, $\color{Green}{\textsf{+2,031}}$ / $\color{Red}{\textsf{-433}}$
 
 ## 🤝 Connect with me
 
