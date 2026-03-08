@@ -518,6 +518,18 @@ function generateLanguageBadge(lang) {
   return `![${lang.name}](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=${encodedColor}&message=${encodedMessage})`
 }
 
+function generateAdditionsBadge(n) {
+  const formatted = formatNumber(n)
+  const encodedMessage = encodeURIComponent(`+${formatted}`)
+  return `![+${formatted}](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=${encodedMessage})`
+}
+
+function generateDeletionsBadge(n) {
+  const formatted = formatNumber(n)
+  const encodedMessage = encodeURIComponent(`-${formatted}`)
+  return `![-${formatted}](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=${encodedMessage})`
+}
+
 function processTemplate(template, data) {
   let result = template
   
@@ -530,8 +542,8 @@ function processTemplate(template, data) {
   result = result.replace(/{{\s*REPOS_OWNED_ALL_TIME\s*}}/g, formatNumber(data.reposOwned))
   result = result.replace(/{{\s*STARS_RECEIVED\s*}}/g, formatNumber(data.starsReceived))
   result = result.replace(/{{\s*STARS_ALL_TIME\s*}}/g, formatNumber(data.starsReceived))
-  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, `$\\color{Green}{\\textsf{+${formatNumber(data.totalAdditionsLastYear)}}}$`)
-  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, `$\\color{Red}{\\textsf{-${formatNumber(data.totalDeletionsLastYear)}}}$`)
+  result = result.replace(/{{\s*TOTAL_ADDITIONS_LAST_YEAR\s*}}/g, generateAdditionsBadge(data.totalAdditionsLastYear))
+  result = result.replace(/{{\s*TOTAL_DELETIONS_LAST_YEAR\s*}}/g, generateDeletionsBadge(data.totalDeletionsLastYear))
   result = result.replace(/{{\s*TOTAL_ISSUES_ALL_TIME\s*}}/g, formatNumber(data.totalIssuesAllTime))
   result = result.replace(/{{\s*TOTAL_PRS_ALL_TIME\s*}}/g, formatNumber(data.totalPRsAllTime))
   result = result.replace(/{{\s*TOTAL_ISSUES_LAST_YEAR\s*}}/g, formatNumber(data.totalIssuesLastYear))
@@ -560,8 +572,8 @@ function processTemplate(template, data) {
       item = item.replace(/{{\s*REPO_NAME\s*}}/g, repo.name)
       item = item.replace(/{{\s*REPO_URL\s*}}/g, repo.url)
       item = item.replace(/{{\s*REPO_COMMITS\s*}}/g, formatNumber(repo.commits))
-      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, `$\\color{Green}{\\textsf{+${formatNumber(repo.additions)}}}$`)
-      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, `$\\color{Red}{\\textsf{-${formatNumber(repo.deletions)}}}$`)
+      item = item.replace(/{{\s*REPO_ADDITIONS\s*}}/g, generateAdditionsBadge(repo.additions))
+      item = item.replace(/{{\s*REPO_DELETIONS\s*}}/g, generateDeletionsBadge(repo.deletions))
       return item.trimEnd()
     }).join('\n')
     result = result.replace(/{{\s*REPO_TEMPLATE_START\s*}}[\s\S]*?{{\s*REPO_TEMPLATE_END\s*}}/, repoItems)
@@ -707,8 +719,8 @@ async function main() {
         `🔥 **${formatNumber(totalCommitsLastYear)}** commits`,
         `📝 **${formatNumber(totalIssuesLastYear)}** issues`,
         `🔀 **${formatNumber(totalPRsLastYear)}** PRs`,
-        `${`$\\color{Green}{\\textsf{+${formatNumber(totalAdditionsLastYear)}}}$`} lines added`,
-        `${`$\\color{Red}{\\textsf{-${formatNumber(totalDeletionsLastYear)}}}$`} lines removed`
+        `${generateAdditionsBadge(totalAdditionsLastYear)} lines added`,
+        `${generateDeletionsBadge(totalDeletionsLastYear)} lines removed`
       ]
 
       for (let i = 0; i < 5; i++) {

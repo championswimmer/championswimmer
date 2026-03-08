@@ -9,21 +9,21 @@ Joined Github **14** years ago.
 | 📦 **384** public repos | 🔥 **1,275** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2042%25) |
 | 🔥 **12,744** commits | 📝 **52** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2021%25) |
 | 📋 **744** issues | 🔀 **50** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2018%25) |
-| 🔀 **586** PRs | $\color{Green}{\textsf{+511,424}}$ lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%2010%25) |
-| ⭐ **5,572** stars | $\color{Red}{\textsf{-56,675}}$ lines removed | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%209%25) |
+| 🔀 **586** PRs | ![+511,424](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B511%2C424) lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%2010%25) |
+| ⭐ **5,572** stars | ![-56,675](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-56%2C675) lines removed | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%209%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
-- [TwoFac](https://github.com/championswimmer/TwoFac) - 167 commits, $\color{Green}{\textsf{+26,638}}$ / $\color{Red}{\textsf{-7,199}}$
-- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 104 commits, $\color{Green}{\textsf{+36,976}}$ / $\color{Red}{\textsf{-9,816}}$
-- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, $\color{Green}{\textsf{+7,824}}$ / $\color{Red}{\textsf{-1,912}}$
-- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 79 commits, $\color{Green}{\textsf{+10,177}}$ / $\color{Red}{\textsf{-3,134}}$
-- [midpoint-place-landing-page](https://github.com/championswimmer/midpoint-place-landing-page) - 54 commits, $\color{Green}{\textsf{+11,981}}$ / $\color{Red}{\textsf{-1,456}}$
-- [app.midpoint.place](https://github.com/championswimmer/app.midpoint.place) - 54 commits, $\color{Green}{\textsf{+5,304}}$ / $\color{Red}{\textsf{-952}}$
-- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, $\color{Green}{\textsf{+370,689}}$ / $\color{Red}{\textsf{-26,147}}$
-- [metromap.io](https://github.com/championswimmer/metromap.io) - 54 commits, $\color{Green}{\textsf{+25,761}}$ / $\color{Red}{\textsf{-4,052}}$
-- [championswimmer](https://github.com/championswimmer/championswimmer) - 50 commits, $\color{Green}{\textsf{+2,093}}$ / $\color{Red}{\textsf{-495}}$
-- [goals.cash-legacy](https://github.com/championswimmer/goals.cash-legacy) - 47 commits, $\color{Green}{\textsf{+13,981}}$ / $\color{Red}{\textsf{-1,512}}$
+- [TwoFac](https://github.com/championswimmer/TwoFac) - 167 commits, ![+26,638](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B26%2C638) / ![-7,199](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-7%2C199)
+- [env.sync.local](https://github.com/championswimmer/env.sync.local) - 104 commits, ![+36,976](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B36%2C976) / ![-9,816](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-9%2C816)
+- [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, ![+7,824](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B7%2C824) / ![-1,912](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-1%2C912)
+- [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 79 commits, ![+10,177](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B10%2C177) / ![-3,134](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-3%2C134)
+- [midpoint-place-landing-page](https://github.com/championswimmer/midpoint-place-landing-page) - 54 commits, ![+11,981](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B11%2C981) / ![-1,456](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-1%2C456)
+- [app.midpoint.place](https://github.com/championswimmer/app.midpoint.place) - 54 commits, ![+5,304](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B5%2C304) / ![-952](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-952)
+- [elevator-bench](https://github.com/championswimmer/elevator-bench) - 54 commits, ![+370,689](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B370%2C689) / ![-26,147](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-26%2C147)
+- [metromap.io](https://github.com/championswimmer/metromap.io) - 54 commits, ![+25,761](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B25%2C761) / ![-4,052](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-4%2C052)
+- [championswimmer](https://github.com/championswimmer/championswimmer) - 50 commits, ![+2,093](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B2%2C093) / ![-495](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-495)
+- [goals.cash-legacy](https://github.com/championswimmer/goals.cash-legacy) - 47 commits, ![+13,981](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=%2B13%2C981) / ![-1,512](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=-1%2C512)
 
 ## 🤝 Connect with me
 
