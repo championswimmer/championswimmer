@@ -521,13 +521,13 @@ function generateLanguageBadge(lang) {
 function generateAdditionsBadge(n) {
   const formatted = formatNumber(n)
   const encodedMessage = encodeURIComponent(`+${formatted}`)
-  return `![+${formatted}](https://img.shields.io/static/v1?style=flat-square&label=&color=brightgreen&message=${encodedMessage})`
+  return `![+${formatted}](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=${encodedMessage})`
 }
 
 function generateDeletionsBadge(n) {
   const formatted = formatNumber(n)
   const encodedMessage = encodeURIComponent(`-${formatted}`)
-  return `![-${formatted}](https://img.shields.io/static/v1?style=flat-square&label=&color=red&message=${encodedMessage})`
+  return `![-${formatted}](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=${encodedMessage})`
 }
 
 function processTemplate(template, data) {
@@ -750,7 +750,7 @@ async function main() {
 - 🔥 **{{ TOTAL_COMMITS_LAST_YEAR }}** commits
 - 📦 **{{ REPOS_OWNED }}** repositories
 - ⭐ **{{ STARS_ALL_TIME }}** stars received
-- 📈 **+{{ TOTAL_ADDITIONS_LAST_YEAR }}** / **-{{ TOTAL_DELETIONS_LAST_YEAR }}** lines
+- 📈 **+{{ TOTAL_ADDITIONS_LAST_YEAR }}** **-{{ TOTAL_DELETIONS_LAST_YEAR }}** lines
 
 ## 📝 Top Languages
 
@@ -761,7 +761,7 @@ async function main() {
 ## 🚀 Top Repositories
 
 {{ REPO_TEMPLATE_START }}
-- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits (+{{ REPO_ADDITIONS }} / -{{ REPO_DELETIONS }})
+- [{{ REPO_NAME }}]({{ REPO_URL }}) - {{ REPO_COMMITS }} commits (+{{ REPO_ADDITIONS }} -{{ REPO_DELETIONS }})
 {{ REPO_TEMPLATE_END }}
 `
   }
