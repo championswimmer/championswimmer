@@ -1,10 +1,10 @@
 {
-  "timestamp": 1771299153127,
+  "timestamp": 1773966480546,
   "throughYear": 2025,
   "totals": {
-    "commits": 12118,
-    "issues": 728,
-    "prs": 566
+    "commits": 6314,
+    "issues": 492,
+    "prs": 332
   },
   "yearly": {
     "2011": {
@@ -13,74 +13,74 @@
       "prs": 0
     },
     "2012": {
-      "commits": 186,
+      "commits": 91,
       "issues": 0,
       "prs": 7
     },
     "2013": {
-      "commits": 36,
+      "commits": 19,
       "issues": 0,
       "prs": 10
     },
     "2014": {
-      "commits": 247,
+      "commits": 193,
       "issues": 1,
-      "prs": 31
+      "prs": 23
     },
     "2015": {
-      "commits": 1216,
-      "issues": 88,
-      "prs": 81
+      "commits": 403,
+      "issues": 10,
+      "prs": 31
     },
     "2016": {
-      "commits": 1221,
-      "issues": 151,
-      "prs": 174
+      "commits": 458,
+      "issues": 28,
+      "prs": 15
     },
     "2017": {
-      "commits": 1563,
-      "issues": 182,
-      "prs": 56
+      "commits": 947,
+      "issues": 179,
+      "prs": 45
     },
     "2018": {
-      "commits": 2272,
-      "issues": 154,
-      "prs": 111
+      "commits": 1090,
+      "issues": 138,
+      "prs": 95
     },
     "2019": {
-      "commits": 845,
+      "commits": 348,
       "issues": 7,
-      "prs": 11
+      "prs": 10
     },
     "2020": {
-      "commits": 880,
+      "commits": 278,
       "issues": 16,
-      "prs": 16
+      "prs": 15
     },
     "2021": {
-      "commits": 689,
-      "issues": 28,
-      "prs": 3
+      "commits": 236,
+      "issues": 5,
+      "prs": 0
     },
     "2022": {
-      "commits": 677,
+      "commits": 248,
       "issues": 6,
-      "prs": 9
+      "prs": 4
     },
     "2023": {
-      "commits": 454,
+      "commits": 219,
       "issues": 23,
-      "prs": 3
+      "prs": 0
     },
     "2024": {
-      "commits": 621,
+      "commits": 292,
       "issues": 21,
       "prs": 5
     },
     "2025": {
-      "commits": 796,
+      "commits": 701,
       "issues": 42,
-      "prs": 41
+      "prs": 40
     }
   }
 }
