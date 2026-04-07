@@ -6,17 +6,17 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **388** public repos | 🔥 **1,638** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2031%25) |
-| 🔥 **7,371** commits | 📝 **52** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2028%25) |
+| 📦 **388** public repos | 🔥 **1,637** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2031%25) |
+| 🔥 **7,372** commits | 📝 **52** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2028%25) |
 | 📋 **508** issues | 🔀 **81** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%2015%25) |
-| 🔀 **385** PRs | ![+570,993](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B570%2C993) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%2014%25) |
-| ⭐ **5,610** stars | ![-66,747](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-66%2C747) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%2012%25) |
+| 🔀 **385** PRs | ![+570,998](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B570%2C998) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%2014%25) |
+| ⭐ **5,610** stars | ![-66,752](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-66%2C752) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%2012%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
 - [TwoFac](https://github.com/championswimmer/TwoFac) - 351 commits, ![+63,283](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B63%2C283) ![-16,145](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-16%2C145)
 - [env.sync.local](https://github.com/championswimmer/env.sync.local) - 141 commits, ![+55,677](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B55%2C677) ![-10,495](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-10%2C495)
-- [championswimmer](https://github.com/championswimmer/championswimmer) - 83 commits, ![+2,382](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B2%2C382) ![-771](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-771)
+- [championswimmer](https://github.com/championswimmer/championswimmer) - 84 commits, ![+2,387](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B2%2C387) ![-776](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-776)
 - [api.midpoint.place](https://github.com/championswimmer/api.midpoint.place) - 83 commits, ![+10,520](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B10%2C520) ![-3,176](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C176)
 - [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, ![+7,824](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B7%2C824) ![-1,912](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C912)
 - [elevator-bench](https://github.com/championswimmer/elevator-bench) - 59 commits, ![+383,806](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B383%2C806) ![-26,147](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-26%2C147)
