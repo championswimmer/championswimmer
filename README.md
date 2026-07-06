@@ -6,24 +6,24 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **403** public repos | 🔥 **2,807** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2056%25) |
-| 🔥 **10,372** commits | 📝 **52** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
+| 📦 **403** public repos | 🔥 **2,829** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2056%25) |
+| 🔥 **10,395** commits | 📝 **52** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
 | 📋 **529** issues | 🔀 **134** PRs | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%2014%25) |
-| 🔀 **536** PRs | ![+868,505](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B868%2C505) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
-| ⭐ **5,943** stars | ![-234,168](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-234%2C168) lines removed | ![CSS](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23663399&message=CSS%205%25) |
+| 🔀 **536** PRs | ![+848,374](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B848%2C374) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
+| ⭐ **5,945** stars | ![-231,350](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-231%2C350) lines removed | ![CSS](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23663399&message=CSS%205%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
 - [datacenter-tycoon](https://github.com/championswimmer/datacenter-tycoon) - 512 commits, ![+120,118](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B120%2C118) ![-32,302](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-32%2C302)
-- [TwoFac](https://github.com/championswimmer/TwoFac) - 410 commits, ![+70,021](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B70%2C021) ![-18,688](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-18%2C688)
-- [championswimmer](https://github.com/championswimmer/championswimmer) - 174 commits, ![+2,957](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B2%2C957) ![-1,346](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C346)
+- [TwoFac](https://github.com/championswimmer/TwoFac) - 406 commits, ![+66,169](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B66%2C169) ![-18,604](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-18%2C604)
+- [championswimmer](https://github.com/championswimmer/championswimmer) - 175 commits, ![+2,962](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B2%2C962) ![-1,351](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C351)
 - [env.sync.local](https://github.com/championswimmer/env.sync.local) - 141 commits, ![+55,677](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B55%2C677) ![-10,495](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-10%2C495)
 - [cityguide-ai-techeurope-hack](https://github.com/championswimmer/cityguide-ai-techeurope-hack) - 107 commits, ![+18,824](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B18%2C824) ![-3,405](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C405)
 - [pi-context-prune](https://github.com/championswimmer/pi-context-prune) - 101 commits, ![+9,553](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B9%2C553) ![-1,624](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C624)
 - [api.rediscover.city](https://github.com/championswimmer/api.rediscover.city) - 83 commits, ![+7,824](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B7%2C824) ![-1,912](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C912)
 - [libfprint-eh577](https://github.com/championswimmer/libfprint-eh577) - 69 commits, ![+165,646](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B165%2C646) ![-134,184](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-134%2C184)
 - [elevator-bench](https://github.com/championswimmer/elevator-bench) - 65 commits, ![+392,123](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B392%2C123) ![-26,160](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-26%2C160)
-- [metromap-game](https://github.com/championswimmer/metromap-game) - 55 commits, ![+25,762](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B25%2C762) ![-4,052](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-4%2C052)
+- [arnav.tech](https://github.com/championswimmer/arnav.tech) - 56 commits, ![+9,478](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B9%2C478) ![-1,313](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-1%2C313)
 
 ## 🤝 Connect with me
 
