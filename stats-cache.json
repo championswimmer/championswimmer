@@ -1,10 +1,11 @@
 {
-  "timestamp": 1787098368069,
+  "timestamp": 1788126308579,
   "throughYear": 2025,
+  "excludedRepo": "championswimmer",
   "totals": {
-    "commits": 8124,
-    "issues": 503,
-    "prs": 416
+    "commits": 12611,
+    "issues": 737,
+    "prs": 671
   },
   "yearly": {
     "2011": {
@@ -13,67 +14,67 @@
       "prs": 0
     },
     "2012": {
-      "commits": 91,
+      "commits": 186,
       "issues": 0,
       "prs": 7
     },
     "2013": {
-      "commits": 19,
+      "commits": 36,
       "issues": 0,
       "prs": 10
     },
     "2014": {
-      "commits": 193,
+      "commits": 247,
       "issues": 1,
-      "prs": 23
-    },
-    "2015": {
-      "commits": 403,
-      "issues": 10,
       "prs": 31
     },
+    "2015": {
+      "commits": 1216,
+      "issues": 88,
+      "prs": 81
+    },
     "2016": {
-      "commits": 458,
-      "issues": 28,
-      "prs": 15
+      "commits": 1220,
+      "issues": 151,
+      "prs": 174
     },
     "2017": {
-      "commits": 931,
-      "issues": 178,
-      "prs": 35
+      "commits": 1511,
+      "issues": 181,
+      "prs": 46
     },
     "2018": {
-      "commits": 1090,
-      "issues": 138,
-      "prs": 95
+      "commits": 1988,
+      "issues": 154,
+      "prs": 111
     },
     "2019": {
-      "commits": 348,
+      "commits": 776,
       "issues": 7,
-      "prs": 10
+      "prs": 11
     },
     "2020": {
-      "commits": 278,
+      "commits": 589,
       "issues": 16,
-      "prs": 15
+      "prs": 16
     },
     "2021": {
-      "commits": 236,
-      "issues": 5,
-      "prs": 0
+      "commits": 497,
+      "issues": 18,
+      "prs": 1
     },
     "2022": {
-      "commits": 248,
+      "commits": 510,
       "issues": 6,
-      "prs": 4
+      "prs": 9
     },
     "2023": {
-      "commits": 219,
+      "commits": 364,
       "issues": 23,
-      "prs": 0
+      "prs": 3
     },
     "2024": {
-      "commits": 292,
+      "commits": 293,
       "issues": 21,
       "prs": 5
     },

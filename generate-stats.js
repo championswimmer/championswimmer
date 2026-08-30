@@ -144,11 +144,33 @@ async function loadStatsCache(repoSlug) {
   return { cache: null, source: null }
 }
 
-function isStatsCacheFresh(cache, lastYear) {
+function isStatsCacheFresh(cache, lastYear, excludedRepo) {
   if (!cache || !cache.timestamp || !cache.throughYear) return false
   if (cache.throughYear !== lastYear) return false
+  if (excludedRepo && cache.excludedRepo !== excludedRepo) return false
   const age = Date.now() - cache.timestamp
   return age <= STATS_CACHE_MAX_AGE
+}
+
+function isExcludedRepo(repoNameOrObj, username, repoSlug) {
+  if (!repoNameOrObj) return false
+  const targetRepoName = (typeof repoNameOrObj === 'string' ? repoNameOrObj : (repoNameOrObj?.name || '')).toLowerCase()
+  const targetRepoWithOwner = (typeof repoNameOrObj === 'object' ? (repoNameOrObj?.nameWithOwner || '') : '').toLowerCase()
+  
+  if (repoSlug) {
+    const slugLower = repoSlug.toLowerCase()
+    const slugRepoName = slugLower.includes('/') ? slugLower.split('/')[1] : slugLower
+    if (targetRepoWithOwner && targetRepoWithOwner === slugLower) return true
+    if (targetRepoName && targetRepoName === slugRepoName) return true
+  }
+  
+  if (username) {
+    const usernameLower = username.toLowerCase()
+    if (targetRepoName === usernameLower) return true
+    if (targetRepoWithOwner === `${usernameLower}/${usernameLower}`) return true
+  }
+  
+  return false
 }
 
 function getLanguageColor(languageName, githubColor, languageColors) {
@@ -273,6 +295,33 @@ async function fetchUserInfo(token, fromDate, toDate) {
           totalCommitContributions
           totalIssueContributions
           totalPullRequestContributions
+          commitContributionsByRepository(maxRepositories: 100) {
+            repository {
+              name
+              nameWithOwner
+            }
+            contributions {
+              totalCount
+            }
+          }
+          issueContributionsByRepository(maxRepositories: 100) {
+            repository {
+              name
+              nameWithOwner
+            }
+            contributions {
+              totalCount
+            }
+          }
+          pullRequestContributionsByRepository(maxRepositories: 100) {
+            repository {
+              name
+              nameWithOwner
+            }
+            contributions {
+              totalCount
+            }
+          }
         }
       }
     }
@@ -280,7 +329,7 @@ async function fetchUserInfo(token, fromDate, toDate) {
   return graphqlQuery(token, query)
 }
 
-async function fetchAllTimeContributions(token, years) {
+async function fetchAllTimeContributions(token, years, username, repoSlug) {
   let totalCommits = 0, totalIssues = 0, totalPRs = 0
   const yearly = {}
 
@@ -294,21 +343,57 @@ async function fetchAllTimeContributions(token, years) {
             totalCommitContributions
             totalIssueContributions
             totalPullRequestContributions
+            commitContributionsByRepository(maxRepositories: 100) {
+              repository {
+                name
+                nameWithOwner
+              }
+              contributions {
+                totalCount
+              }
+            }
+            issueContributionsByRepository(maxRepositories: 100) {
+              repository {
+                name
+                nameWithOwner
+              }
+              contributions {
+                totalCount
+              }
+            }
+            pullRequestContributionsByRepository(maxRepositories: 100) {
+              repository {
+                name
+                nameWithOwner
+              }
+              contributions {
+                totalCount
+              }
+            }
           }
         }
       }
     `
     const data = await graphqlQuery(token, query)
     const cc = data.viewer.contributionsCollection
-    totalCommits += cc.totalCommitContributions
-    totalIssues += cc.totalIssueContributions
-    totalPRs += cc.totalPullRequestContributions
+    
+    const excludedCommits = cc.commitContributionsByRepository?.find(c => isExcludedRepo(c.repository, username, repoSlug))?.contributions?.totalCount || 0
+    const excludedIssues = cc.issueContributionsByRepository?.find(c => isExcludedRepo(c.repository, username, repoSlug))?.contributions?.totalCount || 0
+    const excludedPRs = cc.pullRequestContributionsByRepository?.find(c => isExcludedRepo(c.repository, username, repoSlug))?.contributions?.totalCount || 0
+
+    const yearCommits = Math.max(0, cc.totalCommitContributions - excludedCommits)
+    const yearIssues = Math.max(0, cc.totalIssueContributions - excludedIssues)
+    const yearPRs = Math.max(0, cc.totalPullRequestContributions - excludedPRs)
+
+    totalCommits += yearCommits
+    totalIssues += yearIssues
+    totalPRs += yearPRs
     yearly[year] = {
-      commits: cc.totalCommitContributions,
-      issues: cc.totalIssueContributions,
-      prs: cc.totalPullRequestContributions
+      commits: yearCommits,
+      issues: yearIssues,
+      prs: yearPRs
     }
-    console.log(`  ${year}: ${cc.totalCommitContributions} commits, ${cc.totalIssueContributions} issues, ${cc.totalPullRequestContributions} PRs`)
+    console.log(`  ${year}: ${yearCommits} commits, ${yearIssues} issues, ${yearPRs} PRs (excluded ${excludedCommits} commits)`)
   }
 
   return { totalCommits, totalIssues, totalPRs, yearly }
@@ -345,7 +430,7 @@ async function fetchTotalStars(token) {
   return totalStars
 }
 
-async function fetchUserReposWithCommits(token, username, userId, since, languageColors) {
+async function fetchUserReposWithCommits(token, username, userId, since, languageColors, repoSlug) {
   const repos = []
   let cursor = null
   let hasNextPage = true
@@ -399,6 +484,10 @@ async function fetchUserReposWithCommits(token, username, userId, since, languag
     const repoNodes = data.user.repositories.nodes
     
     for (const repo of repoNodes) {
+      if (isExcludedRepo(repo, username, repoSlug)) {
+        console.log(`  Skipping excluded repo: ${repo.name}`)
+        continue
+      }
       const commitCount = repo.defaultBranchRef?.target?.history?.totalCount || 0
       if (commitCount > 0) {
         const totalLangSize = repo.languages.edges.reduce((sum, e) => sum + e.size, 0)
@@ -600,16 +689,19 @@ async function main() {
   const viewer = userInfo.viewer
   console.log(`Fetching stats for user: ${viewer.login}`)
   
+  const repoSlug = process.env.GITHUB_REPOSITORY
+  const excludedRepoName = repoSlug ? (repoSlug.includes('/') ? repoSlug.split('/')[1] : repoSlug) : viewer.login
+  console.log(`Excluding repository: ${excludedRepoName} from commit and activity counts`)
+
   const accountCreatedAt = new Date(viewer.createdAt)
   const now = new Date()
   const accountAge = Math.floor((now - accountCreatedAt) / (365.25 * 24 * 60 * 60 * 1000))
   
   const years = viewer.contributionsCollection.contributionYears
   const lastYear = new Date().getFullYear() - 1
-  const cacheYear = Math.min(lastYear, 2025)
-  const repoSlug = process.env.GITHUB_REPOSITORY
+  const cacheYear = lastYear
   const { cache: statsCache, source: statsCacheSource } = await loadStatsCache(repoSlug)
-  const cacheFresh = isStatsCacheFresh(statsCache, cacheYear)
+  const cacheFresh = isStatsCacheFresh(statsCache, cacheYear, excludedRepoName)
   let cachedTotals = null
   let cachedYears = null
 
@@ -625,7 +717,7 @@ async function main() {
 
   console.log(`Fetching all-time contributions for years: ${yearsToFetch.join(', ') || 'none'}`)
   const allTime = yearsToFetch.length > 0
-    ? await fetchAllTimeContributions(token, yearsToFetch)
+    ? await fetchAllTimeContributions(token, yearsToFetch, viewer.login, repoSlug)
     : { totalCommits: 0, totalIssues: 0, totalPRs: 0, yearly: {} }
 
   const totalCommitsAllTime = (cachedTotals?.commits || 0) + allTime.totalCommits
@@ -636,14 +728,19 @@ async function main() {
     ...(allTime.yearly || {})
   }
 
-  const totalCommitsLastYear = viewer.lastYear.totalCommitContributions
-  const totalIssuesLastYear = viewer.lastYear.totalIssueContributions
-  const totalPRsLastYear = viewer.lastYear.totalPullRequestContributions
+  const excludedLastYearCommits = viewer.lastYear.commitContributionsByRepository?.find(c => isExcludedRepo(c.repository, viewer.login, repoSlug))?.contributions?.totalCount || 0
+  const excludedLastYearIssues = viewer.lastYear.issueContributionsByRepository?.find(c => isExcludedRepo(c.repository, viewer.login, repoSlug))?.contributions?.totalCount || 0
+  const excludedLastYearPRs = viewer.lastYear.pullRequestContributionsByRepository?.find(c => isExcludedRepo(c.repository, viewer.login, repoSlug))?.contributions?.totalCount || 0
+
+  const totalCommitsLastYear = Math.max(0, viewer.lastYear.totalCommitContributions - excludedLastYearCommits)
+  const totalIssuesLastYear = Math.max(0, viewer.lastYear.totalIssueContributions - excludedLastYearIssues)
+  const totalPRsLastYear = Math.max(0, viewer.lastYear.totalPullRequestContributions - excludedLastYearPRs)
 
   if (!cacheFresh) {
     const cachePayload = {
       timestamp: Date.now(),
       throughYear: cacheYear,
+      excludedRepo: excludedRepoName,
       totals: {
         commits: totalCommitsAllTime,
         issues: totalIssuesAllTime,
@@ -661,7 +758,7 @@ async function main() {
   console.log(`All time - Commits: ${totalCommitsAllTime}, Issues: ${totalIssuesAllTime}, PRs: ${totalPRsAllTime}`)
   console.log(`Last year - Commits: ${totalCommitsLastYear}, Issues: ${totalIssuesLastYear}, PRs: ${totalPRsLastYear}`)
   
-  const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo, languageColors)
+  const reposWithCommits = await fetchUserReposWithCommits(token, viewer.login, viewer.id, oneYearAgo, languageColors, repoSlug)
   console.log(`Found ${reposWithCommits.length} repos with commits in the last year`)
   
   const topLanguages = calculateTopLanguages(reposWithCommits, 5, languageColors)
