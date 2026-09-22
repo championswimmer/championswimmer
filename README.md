@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **412** public repos | 🔥 **2,828** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2063%25) |
-| 🔥 **15,265** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
-| 📋 **764** issues | 🔀 **133** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
+| 📦 **412** public repos | 🔥 **2,830** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2063%25) |
+| 🔥 **15,267** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
+| 📋 **764** issues | 🔀 **132** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
 | 🔀 **796** PRs | ![+951,629](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B951%2C629) lines added | ![CSS](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23663399&message=CSS%206%25) |
-| ⭐ **6,037** stars | ![-247,224](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-247%2C224) lines removed | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%205%25) |
+| ⭐ **6,039** stars | ![-247,224](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-247%2C224) lines removed | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%205%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
