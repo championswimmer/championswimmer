@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **413** public repos | 🔥 **2,893** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2063%25) |
-| 🔥 **15,333** commits | 📝 **38** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
-| 📋 **765** issues | 🔀 **132** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
+| 📦 **415** public repos | 🔥 **2,891** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2064%25) |
+| 🔥 **15,360** commits | 📝 **35** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2016%25) |
+| 📋 **765** issues | 🔀 **130** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%209%25) |
 | 🔀 **796** PRs | ![+953,965](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B953%2C965) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,043** stars | ![-248,506](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-248%2C506) lines removed | ![CSS](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23663399&message=CSS%206%25) |
+| ⭐ **6,043** stars | ![-248,506](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-248%2C506) lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
