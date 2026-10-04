@@ -243,6 +243,12 @@ async function graphqlQuery(token, query, variables = {}) {
       if (data.errors) {
         const errorsSummary = JSON.stringify(data.errors)
         console.log(`  GraphQL errors (requestId=${requestId || 'n/a'}, remaining=${rateLimitRemaining || 'n/a'}, reset=${rateLimitReset || 'n/a'}): ${errorsSummary}`)
+        // Org policies (e.g. max PAT lifetime) null out individual fields with FORBIDDEN.
+        // Retrying can't help, and the rest of the response is still usable.
+        if (data.data && data.errors.every(error => error.type === 'FORBIDDEN')) {
+          console.log('  Continuing with partial data (FORBIDDEN fields are null)')
+          return data.data
+        }
         const shouldRetry = isTransientGraphQLError(data.errors)
         if (shouldRetry && attempt < maxAttempts) {
           const delayMs = Math.min(1000 * Math.pow(2, attempt - 1), 20000)
