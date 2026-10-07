@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **417** public repos | 🔥 **3,066** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2065%25) |
-| 🔥 **15,898** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2015%25) |
-| 📋 **768** issues | 🔀 **163** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
-| 🔀 **834** PRs | ![+977,537](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B977%2C537) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,046** stars | ![-265,505](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-265%2C505) lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%205%25) |
+| 📦 **417** public repos | 🔥 **3,070** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2065%25) |
+| 🔥 **15,902** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2015%25) |
+| 📋 **768** issues | 🔀 **164** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
+| 🔀 **835** PRs | ![+977,537](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B977%2C537) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
+| ⭐ **6,046** stars | ![-265,505](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-265%2C505) lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
