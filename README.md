@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **417** public repos | 🔥 **3,070** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2065%25) |
-| 🔥 **15,902** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2015%25) |
-| 📋 **768** issues | 🔀 **164** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
-| 🔀 **835** PRs | ![+977,537](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B977%2C537) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,046** stars | ![-265,505](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-265%2C505) lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%206%25) |
+| 📦 **417** public repos | 🔥 **3,080** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2065%25) |
+| 🔥 **15,912** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2015%25) |
+| 📋 **768** issues | 🔀 **169** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
+| 🔀 **840** PRs | ![+979,915](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B979%2C915) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
+| ⭐ **6,088** stars | ![-265,985](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-265%2C985) lines removed | ![Shell](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2389e051&message=Shell%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
@@ -20,7 +20,7 @@ Joined Github **14** years ago.
 - [pi-context-prune](https://github.com/championswimmer/pi-context-prune) - 124 commits, ![+11,014](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B11%2C014) ![-2,958](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-2%2C958)
 - [arnav.tech](https://github.com/championswimmer/arnav.tech) - 108 commits, ![+18,089](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B18%2C089) ![-2,151](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-2%2C151)
 - [cityguide-ai-techeurope-hack](https://github.com/championswimmer/cityguide-ai-techeurope-hack) - 107 commits, ![+18,824](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B18%2C824) ![-3,405](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C405)
-- [pi-subagent-manager](https://github.com/championswimmer/pi-subagent-manager) - 90 commits, ![+49,233](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B49%2C233) ![-20,932](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-20%2C932)
+- [pi-subagent-manager](https://github.com/championswimmer/pi-subagent-manager) - 101 commits, ![+51,611](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B51%2C611) ![-21,412](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-21%2C412)
 - [tephra](https://github.com/championswimmer/tephra) - 83 commits, ![+74,951](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B74%2C951) ![-12,674](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-12%2C674)
 - [libfprint-eh577](https://github.com/championswimmer/libfprint-eh577) - 69 commits, ![+165,646](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B165%2C646) ![-134,184](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-134%2C184)
 - [elevator-bench](https://github.com/championswimmer/elevator-bench) - 65 commits, ![+392,123](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B392%2C123) ![-26,160](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-26%2C160)
