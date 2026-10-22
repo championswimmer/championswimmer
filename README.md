@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **419** public repos | 🔥 **3,249** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
+| 📦 **419** public repos | 🔥 **3,243** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
 | 🔥 **16,081** commits | 📝 **37** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2014%25) |
-| 📋 **768** issues | 🔀 **208** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
-| 🔀 **879** PRs | ![+663,804](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B663%2C804) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,170** stars | ![-258,449](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-258%2C449) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
+| 📋 **768** issues | 🔀 **209** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
+| 🔀 **880** PRs | ![+663,804](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B663%2C804) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
+| ⭐ **6,171** stars | ![-258,449](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-258%2C449) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
