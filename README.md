@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **419** public repos | 🔥 **3,251** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
-| 🔥 **16,091** commits | 📝 **35** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2014%25) |
+| 📦 **419** public repos | 🔥 **3,250** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
+| 🔥 **16,091** commits | 📝 **33** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2014%25) |
 | 📋 **768** issues | 🔀 **212** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
 | 🔀 **883** PRs | ![+665,656](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B665%2C656) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,173** stars | ![-258,601](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-258%2C601) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
+| ⭐ **6,171** stars | ![-258,601](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-258%2C601) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
