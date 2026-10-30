@@ -10,7 +10,7 @@ Joined Github **14** years ago.
 | 🔥 **16,095** commits | 📝 **33** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2014%25) |
 | 📋 **768** issues | 🔀 **214** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%208%25) |
 | 🔀 **886** PRs | ![+670,151](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B670%2C151) lines added | ![HTML](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23e34c26&message=HTML%206%25) |
-| ⭐ **6,172** stars | ![-262,788](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-262%2C788) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
+| ⭐ **6,174** stars | ![-262,788](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-262%2C788) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
