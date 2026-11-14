@@ -6,17 +6,17 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **421** public repos | 🔥 **3,349** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
-| 🔥 **16,545** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2013%25) |
-| 📋 **767** issues | 🔀 **242** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%207%25) |
-| 🔀 **999** PRs | ![+945,527](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B945%2C527) lines added | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%207%25) |
-| ⭐ **6,190** stars | ![-282,018](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-282%2C018) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
+| 📦 **421** public repos | 🔥 **3,338** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2067%25) |
+| 🔥 **16,551** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2013%25) |
+| 📋 **767** issues | 🔀 **244** PRs | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%207%25) |
+| 🔀 **1,002** PRs | ![+945,563](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B945%2C563) lines added | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%207%25) |
+| ⭐ **6,190** stars | ![-282,059](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-282%2C059) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%206%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
 - [datacenter-tycoon](https://github.com/championswimmer/datacenter-tycoon) - 525 commits, ![+124,779](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B124%2C779) ![-33,874](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-33%2C874)
 - [TwoFac](https://github.com/championswimmer/TwoFac) - 401 commits, ![+65,425](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B65%2C425) ![-18,439](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-18%2C439)
-- [pi-subagent-manager](https://github.com/championswimmer/pi-subagent-manager) - 183 commits, ![+70,896](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B70%2C896) ![-27,754](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-27%2C754)
+- [pi-subagent-manager](https://github.com/championswimmer/pi-subagent-manager) - 185 commits, ![+70,932](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B70%2C932) ![-27,795](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-27%2C795)
 - [tephra](https://github.com/championswimmer/tephra) - 148 commits, ![+363,549](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B363%2C549) ![-41,505](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-41%2C505)
 - [env.sync.local](https://github.com/championswimmer/env.sync.local) - 144 commits, ![+57,453](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B57%2C453) ![-10,728](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-10%2C728)
 - [pi-context-prune](https://github.com/championswimmer/pi-context-prune) - 133 commits, ![+11,410](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B11%2C410) ![-3,049](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C049)
