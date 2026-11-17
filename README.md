@@ -6,11 +6,11 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **421** public repos | 🔥 **3,368** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2064%25) |
-| 🔥 **16,583** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2013%25) |
-| 📋 **767** issues | 🔀 **254** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%209%25) |
-| 🔀 **1,012** PRs | ![+967,621](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B967%2C621) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%207%25) |
-| ⭐ **6,200** stars | ![-282,348](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-282%2C348) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%207%25) |
+| 📦 **421** public repos | 🔥 **3,371** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2064%25) |
+| 🔥 **16,586** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2013%25) |
+| 📋 **767** issues | 🔀 **255** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%209%25) |
+| 🔀 **1,013** PRs | ![+967,884](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B967%2C884) lines added | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%207%25) |
+| ⭐ **6,201** stars | ![-282,397](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-282%2C397) lines removed | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%207%25) |
 
 ## 🚀 Most Active Projects (Last Year)
 
@@ -22,7 +22,7 @@ Joined Github **14** years ago.
 - [pi-context-prune](https://github.com/championswimmer/pi-context-prune) - 133 commits, ![+11,410](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B11%2C410) ![-3,049](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C049)
 - [arnav.tech](https://github.com/championswimmer/arnav.tech) - 118 commits, ![+18,670](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B18%2C670) ![-2,163](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-2%2C163)
 - [cityguide-ai-techeurope-hack](https://github.com/championswimmer/cityguide-ai-techeurope-hack) - 107 commits, ![+18,824](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B18%2C824) ![-3,405](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-3%2C405)
-- [pi-context-decisions](https://github.com/championswimmer/pi-context-decisions) - 82 commits, ![+49,066](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B49%2C066) ![-6,917](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-6%2C917)
+- [pi-context-decisions](https://github.com/championswimmer/pi-context-decisions) - 85 commits, ![+49,329](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B49%2C329) ![-6,966](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-6%2C966)
 - [libfprint-eh577](https://github.com/championswimmer/libfprint-eh577) - 69 commits, ![+165,646](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B165%2C646) ![-134,184](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-134%2C184)
 
 ## 🤝 Connect with me
