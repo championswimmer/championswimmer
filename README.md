@@ -6,10 +6,10 @@ Joined Github **14** years ago.
 
 | All Time | Last Year | Top languages (last year) |
 |----------|-----------|---------------------------|
-| 📦 **425** public repos | 🔥 **3,542** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2065%25) |
-| 🔥 **16,770** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2012%25) |
-| 📋 **767** issues | 🔀 **272** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%208%25) |
-| 🔀 **1,030** PRs | ![+856,587](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B856%2C587) lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%208%25) |
+| 📦 **427** public repos | 🔥 **3,569** commits | ![TypeScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%233178c6&message=TypeScript%2066%25) |
+| 🔥 **16,799** commits | 📝 **30** issues | ![Kotlin](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23A97BFF&message=Kotlin%2012%25) |
+| 📋 **767** issues | 🔀 **285** PRs | ![Go](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2300ADD8&message=Go%208%25) |
+| 🔀 **1,043** PRs | ![+856,587](https://img.shields.io/static/v1?style=plastic&label=&color=brightgreen&message=%2B856%2C587) lines added | ![JavaScript](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%23f1e05a&message=JavaScript%208%25) |
 | ⭐ **6,245** stars | ![-165,002](https://img.shields.io/static/v1?style=plastic&label=&color=red&message=-165%2C002) lines removed | ![Vue](https://img.shields.io/static/v1?style=flat-square&label=%E2%A0%80&color=555&labelColor=%2341b883&message=Vue%207%25) |
 
 ## 🚀 Most Active Projects (Last Year)
